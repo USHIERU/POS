@@ -11,8 +11,7 @@ class Password {
   }
 
   void _validatePassword(String password) {
-    // TODO: Fix RegExp
-    RegExp regExp = new RegExp(r'([1-9]{4}\w)');
+    RegExp regExp = new RegExp(r'([0-9]{4}$)');
 
     if (!regExp.hasMatch(password))
       throw InvalidArgumentError(
@@ -22,12 +21,4 @@ class Password {
   }
 
   toString() => _password;
-}
-
-main() {
-  try {
-    Password('1231');
-  } on InvalidArgumentError catch (e) {
-    print(e.errMsg);
-  }
 }
