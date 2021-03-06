@@ -1,0 +1,4 @@
+class ConnectionRepository {
+  connect() {}
+  close() {}
+}
