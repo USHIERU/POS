@@ -1,5 +1,5 @@
-import 'package:pos/context/pos/products/domain/product.dart';
-import 'package:pos/context/pos/users/domain/user.dart';
+import 'package:pos/contexts/pos/products/domain/product.dart';
+import 'package:pos/contexts/pos/users/domain/user.dart';
 
 class Ticket {
   String _description;

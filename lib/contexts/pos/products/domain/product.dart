@@ -1,4 +1,4 @@
-import 'package:pos/context/pos/ingredients/domain/ingredient.dart';
+import 'package:pos/contexts/pos/ingredients/domain/ingredient.dart';
 
 class Product {
   String _name;
@@ -12,9 +12,13 @@ class Product {
 
   get price => _price;
 
+  // ignore: unnecessary_getters_setters
   get quantity => _quantity;
+  // ignore: unnecessary_getters_setters
   set quantity(int quantity) => _quantity = quantity;
 
+  // ignore: unnecessary_getters_setters
   get recipe => _recipe;
+  // ignore: unnecessary_getters_setters
   set recipe(List<Ingredient> recipe) => _recipe = recipe;
 }
