@@ -9,5 +9,11 @@ class Ticket {
 
   Ticket(this._description, this._waiter, this._products, this._total);
 
-  
+  get description => _description;
+
+  get waiter => _waiter;
+
+  get produts => _products;
+
+  get total => _total;
 }
