@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:pos/app/frontend/config/size_config.dart';
-import 'package:pos/app/frontend/layout/models/layout_item_model.dart';
 
 class MainLayout extends StatefulWidget {
   final List<LayoutItemModel> layoutItemModels;
@@ -16,6 +15,7 @@ class _MainLayoutState extends State<MainLayout> {
   final double _separation = 30;
   String _currentLocation = '';
   Widget _container = Container();
+  int _containerFlex = 15;
 
   @override
   void initState() {
@@ -29,6 +29,11 @@ class _MainLayoutState extends State<MainLayout> {
   @override
   Widget build(BuildContext context) {
     SizeConfig(context);
+
+    if (SizeConfig.widthScreen < 1420.0) {
+      _containerFlex = 12;
+    }
+
     return Scaffold(
       body: Center(
         child: Container(
@@ -72,7 +77,7 @@ class _MainLayoutState extends State<MainLayout> {
                                 : Colors.black54,
                             backgroundColor: Colors.white,
                             minimumSize: Size(
-                                double.maxFinite, SizeConfig.heightBlock * 8),
+                                double.maxFinite, SizeConfig.heightBlock * 6),
                           ),
                         )
                     ],
@@ -81,7 +86,7 @@ class _MainLayoutState extends State<MainLayout> {
               ),
               SizedBox(width: _separation),
               Expanded(
-                flex: 10,
+                flex: _containerFlex,
                 child: Column(
                   children: [
                     Container(
@@ -91,8 +96,12 @@ class _MainLayoutState extends State<MainLayout> {
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(10),
                       ),
-                      child:
-                          Center(child: Text(_currentLocation.toUpperCase())),
+                      child: Center(
+                        child: Text(
+                          _currentLocation.toUpperCase(),
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                      ),
                     ),
                     SizedBox(height: _separation),
                     Expanded(
@@ -114,4 +123,22 @@ class _MainLayoutState extends State<MainLayout> {
       ),
     );
   }
+}
+
+class LayoutItemModel {
+  String _name;
+  IconData _icon;
+  Widget _widget;
+
+  LayoutItemModel(String name, IconData icon, Widget widget) {
+    _name = name;
+    _icon = icon;
+    _widget = widget;
+  }
+
+  get name => _name;
+
+  get icon => _icon;
+
+  get widget => _widget;
 }

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pos/app/frontend/layout/main_layout.dart';
-import 'package:pos/app/frontend/layout/models/layout_item_model.dart';
-import 'package:pos/app/frontend/views/back_office.dart';
+import 'package:pos/app/frontend/views/back_office/back_office.dart';
 
 class Home extends StatefulWidget {
   static const routeName = 'Home';
