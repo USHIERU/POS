@@ -3,9 +3,9 @@ import 'package:pos/app/frontend/views/back_office/views/users/bloc/users_event.
 import 'package:pos/app/frontend/views/back_office/views/users/bloc/users_state.dart';
 
 class UsersBloc extends Bloc<UserEvent, UserState> {
-  UserState initialState;
+  UserState _initialState;
 
-  UsersBloc(this.initialState) : super(initialState);
+  UsersBloc(this._initialState) : super(_initialState);
 
   @override
   Stream<UserState> mapEventToState(UserEvent event) async* {
