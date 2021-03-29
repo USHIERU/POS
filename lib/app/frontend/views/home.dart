@@ -11,7 +11,9 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   final List<LayoutItemModel> layoutItemModels = [
-    LayoutItemModel('Back office', Icons.settings, BackOffice())
+    LayoutItemModel('Quick sale', Icons.monetization_on, Container()),
+    LayoutItemModel('Tables', Icons.apps, Container()),
+    LayoutItemModel('Back office', Icons.settings, BackOffice()),
   ];
 
   @override

@@ -23,8 +23,14 @@ class _MainLayoutState extends State<MainLayout> {
       _currentLocation = widget.layoutItemModels[0].name;
       _container = widget.layoutItemModels[0].widget;
     }
+
     super.initState();
   }
+
+  void _changeContainer(LayoutItemModel layoutItemModel) => setState(() {
+        _currentLocation = layoutItemModel.name;
+        _container = layoutItemModel.widget;
+      });
 
   @override
   Widget build(BuildContext context) {
@@ -59,8 +65,7 @@ class _MainLayoutState extends State<MainLayout> {
                       for (LayoutItemModel layoutItemModel
                           in widget.layoutItemModels)
                         TextButton(
-                          onPressed: () => setState(
-                              () => _currentLocation = layoutItemModel.name),
+                          onPressed: () => _changeContainer(layoutItemModel),
                           child: Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 20),
                             child: Row(

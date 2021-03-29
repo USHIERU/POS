@@ -11,40 +11,48 @@ class _BackOfficeState extends State<BackOffice> {
 
   List<BackOfficeItemModel> _backOfficeItemModel = [
     BackOfficeItemModel('Users', Icons.account_circle, UsersBackOffice()),
+    BackOfficeItemModel('Products', Icons.assignment, Container()),
+    BackOfficeItemModel('Ingredients', Icons.assignment, Container()),
+    BackOfficeItemModel('Tickets', Icons.assignment, Container()),
   ];
+
+  void _changeContainer(BackOfficeItemModel backOfficeItemModel) =>
+      setState(() {
+        _container = backOfficeItemModel.widget;
+      });
+
+  void nullContainer() => setState(() => _container = null);
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.all(20),
-      child: GridView.count(
-        crossAxisCount: 10,
-        children: _container != null
-            ? [_container]
-            : _backOfficeItemModel.map(
-                (itemModel) {
-                  return Padding(
-                    padding: const EdgeInsets.all(10.0),
-                    child: TextButton(
-                      onPressed: () =>
-                          setState(() => _container = itemModel.widget),
-                      child: Center(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Icon(
-                              itemModel.icon,
-                              size: 50,
-                            ),
-                            Text(itemModel.name),
-                          ],
-                        ),
+      child: _container ??
+          GridView.count(
+            crossAxisCount: 10,
+            children: _backOfficeItemModel.map(
+              (itemModel) {
+                return Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: TextButton(
+                    onPressed: () => _changeContainer(itemModel),
+                    child: Center(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            itemModel.icon,
+                            size: 50,
+                          ),
+                          Text(itemModel.name),
+                        ],
                       ),
                     ),
-                  );
-                },
-              ).toList(),
-      ),
+                  ),
+                );
+              },
+            ).toList(),
+          ),
     );
   }
 }
