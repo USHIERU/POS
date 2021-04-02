@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pos/app/frontend/views/back_office/views/products/products.dart';
 import 'package:pos/app/frontend/views/back_office/views/users/users.dart';
 
 class BackOffice extends StatefulWidget {
@@ -11,7 +12,7 @@ class _BackOfficeState extends State<BackOffice> {
 
   List<BackOfficeItemModel> _backOfficeItemModel = [
     BackOfficeItemModel('Users', Icons.account_circle, UsersBackOffice()),
-    BackOfficeItemModel('Products', Icons.assignment, Container()),
+    BackOfficeItemModel('Products', Icons.assignment, Products()),
     BackOfficeItemModel('Ingredients', Icons.assignment, Container()),
     BackOfficeItemModel('Tickets', Icons.assignment, Container()),
   ];
