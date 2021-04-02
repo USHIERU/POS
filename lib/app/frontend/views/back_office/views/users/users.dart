@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:pos/app/frontend/config/size_config.dart';
 import 'package:pos/app/frontend/views/back_office/views/users/bloc/users_bloc.dart';
 import 'package:pos/app/frontend/views/back_office/views/users/bloc/users_state.dart';
 
