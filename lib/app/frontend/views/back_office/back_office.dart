@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:pos/app/frontend/config/size_config.dart';
 import 'package:pos/app/frontend/views/back_office/views/products/products.dart';
 import 'package:pos/app/frontend/views/back_office/views/users/users.dart';
 
 // CONTAINER SIZE
-// Width: SizeConfig.widthBlock * 76.5
-// Height: SizeConfig.heightBlock * 89
+// Heigh: SizeConfig.heightBlock * 90,
+// Width: SizeConfig.widthBlock * 78.5,
 
 class BackOffice extends StatefulWidget {
   @override
@@ -31,38 +30,32 @@ class _BackOfficeState extends State<BackOffice> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(
-        horizontal: SizeConfig.widthBlock,
-        vertical: SizeConfig.heightBlock * .5,
-      ),
-      child: _container ??
-          GridView.count(
-            crossAxisCount: 8,
-            children: _backOfficeItemModel.map(
-              (itemModel) {
-                return Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: TextButton(
-                    onPressed: () => _changeContainer(itemModel),
-                    child: Center(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(
-                            itemModel.icon,
-                            size: 50,
-                          ),
-                          Text(itemModel.name),
-                        ],
-                      ),
+    return _container ??
+        GridView.count(
+          crossAxisCount: 8,
+          children: _backOfficeItemModel.map(
+            (itemModel) {
+              return Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: TextButton(
+                  onPressed: () => _changeContainer(itemModel),
+                  child: Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          itemModel.icon,
+                          size: 50,
+                        ),
+                        Text(itemModel.name),
+                      ],
                     ),
                   ),
-                );
-              },
-            ).toList(),
-          ),
-    );
+                ),
+              );
+            },
+          ).toList(),
+        );
   }
 }
 
