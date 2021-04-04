@@ -9,7 +9,7 @@ void main() {
   WidgetsFlutterBinding.ensureInitialized();
   if (Platform.isWindows || Platform.isLinux || Platform.isMacOS) {
     setWindowTitle('Point Of Sale');
-    setWindowMinSize(const Size(800, 600));
+    setWindowMinSize(const Size(1024, 768));
     setWindowMaxSize(Size.infinite);
   }
   runApp(MyApp());

@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:pos/app/frontend/config/size_config.dart';
 import 'package:pos/app/frontend/views/back_office/views/products/products.dart';
 import 'package:pos/app/frontend/views/back_office/views/users/users.dart';
+
+// CONTAINER SIZE
+// Width: SizeConfig.widthBlock * 76.5
+// Height: SizeConfig.heightBlock * 89
 
 class BackOffice extends StatefulWidget {
   @override
@@ -27,10 +32,13 @@ class _BackOfficeState extends State<BackOffice> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.all(20),
+      padding: EdgeInsets.symmetric(
+        horizontal: SizeConfig.widthBlock,
+        vertical: SizeConfig.heightBlock * .5,
+      ),
       child: _container ??
           GridView.count(
-            crossAxisCount: 10,
+            crossAxisCount: 8,
             children: _backOfficeItemModel.map(
               (itemModel) {
                 return Padding(

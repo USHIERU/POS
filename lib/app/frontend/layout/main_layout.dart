@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:pos/app/frontend/config/size_config.dart';
 
+// CONTAINER SIZE
+// Width: SizeConfig.widthBlock * 78.5
+// Height: SizeConfig.heightBlock * 90
+
 class MainLayout extends StatefulWidget {
   final List<LayoutItemModel> layoutItemModels;
 
@@ -12,10 +16,8 @@ class MainLayout extends StatefulWidget {
 }
 
 class _MainLayoutState extends State<MainLayout> {
-  final double _separation = 30;
   String _currentLocation = '';
   Widget _container = Container();
-  int _containerFlex = 15;
 
   @override
   void initState() {
@@ -35,68 +37,63 @@ class _MainLayoutState extends State<MainLayout> {
   @override
   Widget build(BuildContext context) {
     SizeConfig(context);
-
-    if (SizeConfig.widthScreen < 1420.0) {
-      _containerFlex = 12;
-    }
-
     return Scaffold(
+      backgroundColor: Colors.grey[200],
       body: Center(
         child: Container(
-          height: SizeConfig.heightScreen,
-          width: SizeConfig.widthScreen,
+          height: SizeConfig.heightScreen - (SizeConfig.heightBlock * 2),
+          width: SizeConfig.widthScreen - (SizeConfig.widthBlock * 2),
+          margin: EdgeInsets.symmetric(
+              horizontal: SizeConfig.widthBlock,
+              vertical: SizeConfig.heightBlock),
           color: Colors.grey[200],
-          padding: EdgeInsets.all(_separation),
           child: Row(
             children: [
-              Expanded(
-                flex: 2,
-                child: Container(
-                  height: SizeConfig.heightScreen,
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: Column(
-                    children: [
-                      SizedBox(
-                        height: SizeConfig.heightBlock * 20,
-                      ),
-                      for (LayoutItemModel layoutItemModel
-                          in widget.layoutItemModels)
-                        TextButton(
-                          onPressed: () => _changeContainer(layoutItemModel),
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 20),
-                            child: Row(
-                              children: [
-                                Icon(layoutItemModel.icon),
-                                SizedBox(width: 10),
-                                Text(layoutItemModel.name.toUpperCase())
-                              ],
-                            ),
+              Container(
+                width: SizeConfig.widthBlock * 18.5,
+                height: SizeConfig.heightBlock * 98,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: Column(
+                  children: [
+                    SizedBox(height: SizeConfig.heightBlock * 20),
+                    for (LayoutItemModel layoutItemModel
+                        in widget.layoutItemModels)
+                      TextButton(
+                        onPressed: () => _changeContainer(layoutItemModel),
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 20),
+                          child: Row(
+                            children: [
+                              Icon(layoutItemModel.icon),
+                              SizedBox(width: 10),
+                              Text(layoutItemModel.name.toUpperCase())
+                            ],
                           ),
-                          style: TextButton.styleFrom(
-                            primary: _currentLocation == layoutItemModel.name
-                                ? Colors.blue
-                                : Colors.black54,
-                            backgroundColor: Colors.white,
-                            minimumSize: Size(
-                                double.maxFinite, SizeConfig.heightBlock * 6),
-                          ),
-                        )
-                    ],
-                  ),
+                        ),
+                        style: TextButton.styleFrom(
+                          primary: _currentLocation == layoutItemModel.name
+                              ? Colors.blue
+                              : Colors.black54,
+                          backgroundColor: Colors.white,
+                          minimumSize: Size(
+                              double.maxFinite, SizeConfig.heightBlock * 6),
+                        ),
+                      )
+                  ],
                 ),
               ),
-              SizedBox(width: _separation),
-              Expanded(
-                flex: _containerFlex,
+              SizedBox(width: SizeConfig.widthBlock),
+              Container(
+                width: SizeConfig.widthBlock * 78.5,
+                height: SizeConfig.heightBlock * 98,
                 child: Column(
                   children: [
                     Container(
-                      width: double.maxFinite,
-                      height: 50,
+                      width: SizeConfig.widthBlock * 78.5,
+                      height: SizeConfig.heightBlock * 7,
                       decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(10),
@@ -108,16 +105,15 @@ class _MainLayoutState extends State<MainLayout> {
                         ),
                       ),
                     ),
-                    SizedBox(height: _separation),
-                    Expanded(
-                      child: Container(
-                        width: double.maxFinite,
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: _container,
+                    SizedBox(height: SizeConfig.heightBlock),
+                    Container(
+                      width: SizeConfig.widthBlock * 78.5,
+                      height: SizeConfig.heightBlock * 90,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(10),
                       ),
+                      child: _container,
                     ),
                   ],
                 ),
