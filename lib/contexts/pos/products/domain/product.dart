@@ -1,24 +1,33 @@
 import 'package:pos/contexts/pos/ingredients/domain/ingredient.dart';
+import 'package:pos/contexts/pos/products/domain/product_id.dart';
 
 class Product {
+  ProductID _id;
   String _name;
   double _price;
   int _quantity;
   List<Ingredient> _recipe;
 
-  Product(this._name, this._price);
+  Product._(this._name, this._price);
 
-  get name => _name;
+  factory Product(String name, double price,
+      {ProductID productId, int quantity, List<Ingredient> recipe}) {
+    var product = Product._(name, price);
 
-  get price => _price;
+    product._id = productId;
+    product._quantity = quantity;
+    product._recipe = recipe;
 
-  // ignore: unnecessary_getters_setters
-  get quantity => _quantity;
-  // ignore: unnecessary_getters_setters
-  set quantity(int quantity) => _quantity = quantity;
+    return product;
+  }
 
-  // ignore: unnecessary_getters_setters
-  get recipe => _recipe;
-  // ignore: unnecessary_getters_setters
-  set recipe(List<Ingredient> recipe) => _recipe = recipe;
+  String get name => _name;
+
+  double get price => _price;
+
+  int get quantity => _quantity;
+
+  List<Ingredient> get recipe => _recipe;
+
+  ProductID get id => _id;
 }
