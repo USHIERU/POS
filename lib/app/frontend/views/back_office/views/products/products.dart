@@ -5,6 +5,7 @@ import 'package:pos/app/frontend/views/back_office/views/products/bloc/products_
 import 'package:pos/app/frontend/views/back_office/views/products/bloc/products_event.dart';
 import 'package:pos/app/frontend/views/back_office/views/products/bloc/products_state.dart';
 import 'package:pos/app/frontend/widgets/loading.dart';
+import 'package:pos/app/frontend/widgets/modal.dart';
 import 'package:pos/contexts/pos/products/domain/product.dart';
 
 class Products extends StatefulWidget {
@@ -21,7 +22,6 @@ class _ProductsState extends State<Products> {
   void initState() {
     super.initState();
     _productsBloc.add(GetProductsEvent());
-    _productsBloc.add(AddProductEvent(Product('name 1', 10)));
   }
 
   @override
@@ -53,7 +53,8 @@ class _ProductsState extends State<Products> {
                         child: Row(
                           children: [
                             ElevatedButton(
-                              onPressed: () {},
+                              onPressed: () =>
+                                  _productsBloc.add(ShowModalEvent()),
                               child: Text('Add new product'),
                             ),
                           ],
@@ -91,6 +92,36 @@ class _ProductsState extends State<Products> {
                 Loading(
                   height: SizeConfig.heightBlock * 90,
                   width: SizeConfig.widthBlock * 78.5,
+                ),
+              if (_state.showModal)
+                Modal(
+                  child: Container(
+                    width: SizeConfig.widthBlock * 30,
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        TextFormField(
+                          decoration: InputDecoration(labelText: 'Name'),
+                        ),
+                        TextFormField(
+                          decoration: InputDecoration(labelText: 'Price'),
+                        ),
+                        SizedBox(height: SizeConfig.heightBlock * 2),
+                        TextButton(
+                          onPressed: () {
+                            _productsBloc
+                                .add(AddProductEvent(Product('name 1', 10)));
+                          },
+                          child: Text('Submit'),
+                          style: TextButton.styleFrom(
+                              primary: Colors.white,
+                              backgroundColor: Colors.blue[800],
+                              minimumSize: Size(SizeConfig.widthBlock * 8,
+                                  SizeConfig.heightBlock * 4)),
+                        )
+                      ],
+                    ),
+                  ),
                 ),
             ],
           );

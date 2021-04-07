@@ -24,13 +24,15 @@ class ProductsBloc extends Bloc<ProductsBaseEvent, ProductsBaseState> {
       yield _setState(_initialState.copyWith(products: products));
     } else if (event is AddProductEvent) {
       yield _setState(_initialState.copyWith(isLoading: true));
-      var product =
-          await AddProduct(ProductInMemoryRepository()).run(event.product);
 
-      var products = _initialState.products;
+      await AddProduct(ProductInMemoryRepository()).run(event.product);
 
-      yield _setState(_initialState
-          .copyWith(products: [...products, product], isLoading: false));
+      yield _setState(_initialState.copyWith(
+        isLoading: false,
+        showModal: false,
+      ));
+    } else if (event is ShowModalEvent) {
+      yield _setState(_initialState.copyWith(showModal: true));
     }
   }
 }

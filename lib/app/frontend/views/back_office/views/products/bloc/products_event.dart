@@ -4,6 +4,8 @@ abstract class ProductsBaseEvent {}
 
 class GetProductsEvent extends ProductsBaseEvent {}
 
+class ShowModalEvent extends ProductsBaseEvent {}
+
 class AddProductEvent extends ProductsBaseEvent {
   final Product product;
 
