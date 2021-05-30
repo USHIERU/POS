@@ -6,7 +6,6 @@ class SaveProduct {
 
   SaveProduct(this._productRepository);
 
-  Future<Product> run(Product product) async {
-    return await _productRepository.save(product);
-  }
+  Future<Product> run(Product product) async =>
+      await _productRepository.save(product);
 }

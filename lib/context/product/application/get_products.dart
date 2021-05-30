@@ -6,7 +6,5 @@ class GetProducts {
 
   GetProducts(this._productRepository);
 
-  Future<List<Product>> run() async {
-    return await _productRepository.getProducts();
-  }
+  Future<List<Product>> run() async => await _productRepository.getProducts();
 }
