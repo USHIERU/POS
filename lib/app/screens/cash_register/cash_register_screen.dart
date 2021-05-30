@@ -7,7 +7,6 @@ import 'package:pos/context/product/infrastructure/persistence/products_in_memor
 part 'controllers/cash_register_screen_controller.dart';
 
 class CashRegisterScreen extends GetResponsiveView<CashRegisterScreenController> {
-  static final routeName = 'CashRegister';
   final CashRegisterScreenController controller = Get.put(CashRegisterScreenController());
 
   @override
