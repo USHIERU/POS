@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:pos/app/screens/cash_register/cash_register_screen.dart';
 import 'package:pos/app/screens/product/product_screen.dart';
 
 part 'controllers/home_screen_controller.dart';
@@ -21,6 +22,11 @@ class HomeScreen extends GetResponsiveView<HomeScreenController> {
                   controller.changeContainer(HOME_CONTAINERS.PRODUCTS),
               child: Text('Products'),
             ),
+            ElevatedButton(
+              onPressed: () =>
+                  controller.changeContainer(HOME_CONTAINERS.CASHIER),
+              child: Text('Cashier'),
+            ),
           ],
         ),
       ),
@@ -40,6 +46,11 @@ class HomeScreen extends GetResponsiveView<HomeScreenController> {
               onPressed: () =>
                   controller.changeContainer(HOME_CONTAINERS.PRODUCTS),
               child: Text('Products'),
+            ),
+            ElevatedButton(
+              onPressed: () =>
+                  controller.changeContainer(HOME_CONTAINERS.CASHIER),
+              child: Text('Cashier'),
             ),
           ],
         ),
@@ -64,6 +75,11 @@ class HomeScreen extends GetResponsiveView<HomeScreenController> {
                   onPressed: () =>
                       controller.changeContainer(HOME_CONTAINERS.PRODUCTS),
                   child: Text('Products'),
+                ),
+                ElevatedButton(
+                  onPressed: () =>
+                      controller.changeContainer(HOME_CONTAINERS.CASHIER),
+                  child: Text('Cashier'),
                 ),
               ],
             ),
