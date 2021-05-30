@@ -8,7 +8,6 @@ import 'package:pos/context/product/infrastructure/persistence/products_in_memor
 part 'controllers/product_screen_controller.dart';
 
 class ProductScreen extends GetResponsiveView<ProductScreenController> {
-  static final routeName = 'home';
   final ProductScreenController controller = Get.put(ProductScreenController());
 
   @override
