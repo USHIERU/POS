@@ -9,7 +9,7 @@ part 'controllers/product_screen_controller.dart';
 
 class ProductScreen extends GetResponsiveView<ProductScreenController> {
   static final routeName = 'home';
-  final ProductScreenController controler = Get.put(ProductScreenController());
+  final ProductScreenController controller = Get.put(ProductScreenController());
 
   @override
   Widget phone() {
@@ -19,7 +19,7 @@ class ProductScreen extends GetResponsiveView<ProductScreenController> {
         TextFormField(),
         TextFormField(),
         ElevatedButton(
-          onPressed: () => controler.addProduct(Product('newProduct', 10)),
+          onPressed: () => controller.addProduct(Product('newProduct', 10)),
           child: Text('Add Product'),
         ),
         Divider(),
@@ -27,7 +27,7 @@ class ProductScreen extends GetResponsiveView<ProductScreenController> {
         Obx(
           () => Column(
             mainAxisSize: MainAxisSize.min,
-            children: controler.products
+            children: controller.products
                 .map(
                   (element) => Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -52,7 +52,7 @@ class ProductScreen extends GetResponsiveView<ProductScreenController> {
         TextFormField(),
         TextFormField(),
         ElevatedButton(
-          onPressed: () => controler.addProduct(Product('newProduct', 10)),
+          onPressed: () => controller.addProduct(Product('newProduct', 10)),
           child: Text('Add Product'),
         ),
         Divider(),
@@ -60,7 +60,7 @@ class ProductScreen extends GetResponsiveView<ProductScreenController> {
         Obx(
           () => Column(
             mainAxisSize: MainAxisSize.min,
-            children: controler.products
+            children: controller.products
                 .map(
                   (element) => Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -85,7 +85,7 @@ class ProductScreen extends GetResponsiveView<ProductScreenController> {
         TextFormField(),
         TextFormField(),
         ElevatedButton(
-          onPressed: () => controler.addProduct(Product('newProduct', 10)),
+          onPressed: () => controller.addProduct(Product('newProduct', 10)),
           child: Text('Add Product'),
         ),
         Divider(),
@@ -93,7 +93,7 @@ class ProductScreen extends GetResponsiveView<ProductScreenController> {
         Obx(
           () => Column(
             mainAxisSize: MainAxisSize.min,
-            children: controler.products
+            children: controller.products
                 .map(
                   (element) => Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
