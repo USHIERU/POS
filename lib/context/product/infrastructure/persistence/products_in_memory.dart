@@ -3,10 +3,12 @@ import 'package:pos/context/product/domain/product_repository.dart';
 
 class ProductsInMemery implements ProductRepository {
   static List<Product> _products = <Product>[
-    Product('Tomate', 10),
-    Product('Manzana', 15),
-    Product('Aguacate', 25),
-    Product('Toronja', 20),
+    Product(0, 'Tomate', 10, 1),
+    Product(1, 'Manzana', 15, 1),
+    Product(2, 'Aguacate', 25, 1),
+    Product(3, 'Toronja', 20, 1),
+    Product(4, 'Calabaza', 20, 2),
+    Product(5, 'Zanahoria', 20, 2),
   ];
 
   @override

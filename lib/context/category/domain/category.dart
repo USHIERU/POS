@@ -1,11 +1,18 @@
+import 'package:pos/context/product/domain/product.dart';
+
 class Category {
+  final int id;
   final String name;
   final DateTime availableFrom;
   final DateTime availableTo;
+  List<Product> _products = [];
 
-  Category(this.name, this.availableFrom, this.availableTo);
+  Category(this.id, this.name, this.availableFrom, this.availableTo);
 
   factory Category.empty() {
-    return Category('', DateTime.now(), DateTime.now());
+    return Category(0, '', DateTime.now(), DateTime.now());
   }
+
+  List<Product> get products => _products;
+  set addProduct(Product product) => _products.add(product);
 }
