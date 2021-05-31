@@ -3,6 +3,7 @@ part of '../home_screen.dart';
 enum HOME_CONTAINERS {
   PRODUCTS,
   CASHIER,
+  CATEGORIES,
 }
 
 class HomeScreenController extends GetxController {
@@ -16,6 +17,8 @@ class HomeScreenController extends GetxController {
       container.value = Container(child: ProductScreen());
     else if (newContainer == HOME_CONTAINERS.CASHIER)
       container.value = Container(child: CashRegisterScreen());
+    else if (newContainer == HOME_CONTAINERS.CATEGORIES)
+      container.value = Container(child: CategoryScreen());
 
     Get.back();
   }
