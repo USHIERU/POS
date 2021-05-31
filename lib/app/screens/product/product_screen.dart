@@ -18,7 +18,8 @@ class ProductScreen extends GetResponsiveView<ProductScreenController> {
         TextFormField(),
         TextFormField(),
         ElevatedButton(
-          onPressed: () => controller.addProduct(Product('newProduct', 10)),
+          onPressed: () =>
+              controller.addProduct(Product(6, 'newProduct', 10, 3)),
           child: Text('Add Product'),
         ),
         Divider(),
@@ -51,7 +52,8 @@ class ProductScreen extends GetResponsiveView<ProductScreenController> {
         TextFormField(),
         TextFormField(),
         ElevatedButton(
-          onPressed: () => controller.addProduct(Product('newProduct', 10)),
+          onPressed: () =>
+              controller.addProduct(Product(6, 'newProduct', 10, 3)),
           child: Text('Add Product'),
         ),
         Divider(),
@@ -84,7 +86,8 @@ class ProductScreen extends GetResponsiveView<ProductScreenController> {
         TextFormField(),
         TextFormField(),
         ElevatedButton(
-          onPressed: () => controller.addProduct(Product('newProduct', 10)),
+          onPressed: () =>
+              controller.addProduct(Product(6, 'newProduct', 10, 3)),
           child: Text('Add Product'),
         ),
         Divider(),
