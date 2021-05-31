@@ -1,17 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:pos/context/product/application/get_products.dart';
+import 'package:pos/context/category/application/get_categories.dart';
+import 'package:pos/context/category/domain/category.dart';
+import 'package:pos/context/category/infrastructure/persistence/category_in_memory.dart';
 import 'package:pos/context/product/domain/product.dart';
-import 'package:pos/context/product/infrastructure/persistence/products_in_memory.dart';
 
 part 'controllers/cash_register_screen_controller.dart';
 
-class CashRegisterScreen extends GetResponsiveView<CashRegisterScreenController> {
-  final CashRegisterScreenController controller = Get.put(CashRegisterScreenController());
+class CashRegisterScreen
+    extends GetResponsiveView<CashRegisterScreenController> {
+  final CashRegisterScreenController controller =
+      Get.put(CashRegisterScreenController());
 
   @override
   Widget build(BuildContext context) {
-    controller.getProducts();
+    controller.getCategorys();
     return super.build(context);
   }
 
@@ -20,6 +23,18 @@ class CashRegisterScreen extends GetResponsiveView<CashRegisterScreenController>
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
+        Obx(
+          () => Wrap(
+            children: List.generate(
+              controller.categorires.length,
+              (index) => ElevatedButton(
+                onPressed: () => controller
+                    .showProductsFromCategory(controller.categorires[index]),
+                child: Text(controller.categorires[index].name),
+              ),
+            ),
+          ),
+        ),
         Container(
           color: Colors.grey.shade200,
           width: double.maxFinite,

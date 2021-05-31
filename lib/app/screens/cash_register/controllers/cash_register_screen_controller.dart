@@ -1,14 +1,19 @@
 part of '../cash_register_screen.dart';
 
 class CashRegisterScreenController extends GetxController {
+  RxList<Category> categorires = <Category>[].obs;
   RxList<Product> products = <Product>[].obs;
   RxList<Product> cart = <Product>[].obs;
   RxDouble price = 0.0.obs;
 
-  void getProducts() {
-    GetProducts(ProductsInMemery())
+  void getCategorys() {
+    GetCategories(CategoryInMemory())
         .run()
-        .then((_products) => products.value = _products);
+        .then((_categorires) => categorires.value = _categorires);
+  }
+
+  void showProductsFromCategory(Category category) {
+    products.value = category.products;
   }
 
   void addToCart(Product product) {
