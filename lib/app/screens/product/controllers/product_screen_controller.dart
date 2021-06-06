@@ -1,21 +1,33 @@
 part of '../product_screen.dart';
 
 class ProductScreenController extends GetxController {
+  /// @inmutable
+  final ProductsHive productsHive = ProductsHive();
   RxList<Product> products = <Product>[].obs;
+  RxBool isLoading = true.obs;
 
   ProductScreenController() {
-    getProducts();
+    _open();
+  }
+
+  void _open() async {
+    var readyToLoad = true;
+    while (readyToLoad) {
+      if (productsHive.isOpen) {
+        getProducts();
+      }
+      await Future.delayed(Duration(milliseconds: 200));
+    }
   }
 
   void getProducts() {
-    GetProducts(ProductsInMemery())
-        .run()
-        .then((_products) => products.value = _products);
+    GetProducts(productsHive).run().then((_products) {
+      isLoading.value = false;
+      products.value = _products;
+    });
   }
 
   void addProduct(Product product) {
-    SaveProduct(ProductsInMemery())
-        .run(product)
-        .then((_product) => getProducts());
+    SaveProduct(productsHive).run(product).then((_product) => getProducts());
   }
 }

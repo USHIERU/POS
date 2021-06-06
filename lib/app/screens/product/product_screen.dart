@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:pos/context/product/application/get_products.dart';
 import 'package:pos/context/product/application/save_product.dart';
 import 'package:pos/context/product/domain/product.dart';
-import 'package:pos/context/product/infrastructure/persistence/products_in_memory.dart';
+import 'package:pos/context/product/infrastructure/persistence/products_hive.dart';
 
 part 'controllers/product_screen_controller.dart';
 
@@ -25,20 +25,22 @@ class ProductScreen extends GetResponsiveView<ProductScreenController> {
         Divider(),
         Text('Products'),
         Obx(
-          () => Column(
-            mainAxisSize: MainAxisSize.min,
-            children: controller.products
-                .map(
-                  (element) => Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text('ProductName: ${element.name}'),
-                      Text('ProductPrice: ${element.price}'),
-                    ],
-                  ),
-                )
-                .toList(),
-          ),
+          () => controller.isLoading.value
+              ? CircularProgressIndicator()
+              : Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: controller.products
+                      .map(
+                        (element) => Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text('ProductName: ${element.name}'),
+                            Text('ProductPrice: ${element.price}'),
+                          ],
+                        ),
+                      )
+                      .toList(),
+                ),
         ),
       ],
     );
