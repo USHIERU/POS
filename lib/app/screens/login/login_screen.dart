@@ -45,9 +45,11 @@ class LoginScreen extends GetResponsiveView<LoginScreenController> {
       body: Row(
         children: [
           Expanded(
+            flex: 1,
             child: Container(color: Colors.blue),
           ),
           Expanded(
+            flex: 2,
             child: Container(
               alignment: Alignment.center,
               child: ConstrainedBox(
