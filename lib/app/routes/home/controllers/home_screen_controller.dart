@@ -30,4 +30,8 @@ class HomeLayoutController extends GetxController {
 
     Get.back();
   }
+
+  closeSession(){
+     Get.offAllNamed(LoginScreen.routeName);
+  }
 }

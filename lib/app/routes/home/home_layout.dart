@@ -6,12 +6,13 @@ import 'package:pos/app/screens/category/category_screen.dart';
 import 'package:pos/app/screens/dashboard/dashboard_screen.dart';
 import 'package:pos/app/screens/product/product_screen.dart';
 import 'package:pos/app/widgets/my_buttons.dart';
+import 'package:pos/context/session/application/set_session.dart';
 
 part 'controllers/home_screen_controller.dart';
 
 class HomeLayout extends GetResponsiveView<HomeLayoutController> {
   static final routeName = 'home';
-  final HomeLayoutController controller = Get.put(HomeLayoutController());
+  final HomeLayoutController _controller = Get.put(HomeLayoutController());
 
   Widget _showPopupMenuChild(String string, void Function() onTap) {
     return Container(
@@ -39,9 +40,8 @@ class HomeLayout extends GetResponsiveView<HomeLayoutController> {
           enabled: false,
         ),
         PopupMenuItem(
-            child: _showPopupMenuChild('Sign out', () {
-              Get.offAllNamed(LoginScreen.routeName);
-            }),
+            child: _showPopupMenuChild(
+                'Sign out', () => _controller.closeSession()),
             value: 'Sign out'),
       ],
       elevation: 8.0,
@@ -62,13 +62,14 @@ class HomeLayout extends GetResponsiveView<HomeLayoutController> {
               (index) => MyFlatButton(
                 HOME_CONTAINERS.values[index].toString().substring(
                     HOME_CONTAINERS.values[index].toString().indexOf('.') + 1),
-                () => controller.changeContainer(HOME_CONTAINERS.values[index]),
+                () =>
+                    _controller.changeContainer(HOME_CONTAINERS.values[index]),
               ),
             ),
           ),
         ),
       ),
-      body: Obx(() => controller.container.value),
+      body: Obx(() => _controller.container.value),
     );
   }
 
@@ -86,13 +87,14 @@ class HomeLayout extends GetResponsiveView<HomeLayoutController> {
               (index) => MyFlatButton(
                 HOME_CONTAINERS.values[index].toString().substring(
                     HOME_CONTAINERS.values[index].toString().indexOf('.') + 1),
-                () => controller.changeContainer(HOME_CONTAINERS.values[index]),
+                () =>
+                    _controller.changeContainer(HOME_CONTAINERS.values[index]),
               ),
             ),
           ),
         ),
       ),
-      body: Obx(() => controller.container.value),
+      body: Obx(() => _controller.container.value),
     );
   }
 
@@ -113,8 +115,8 @@ class HomeLayout extends GetResponsiveView<HomeLayoutController> {
                   HOME_CONTAINERS.values[index].toString().substring(
                       HOME_CONTAINERS.values[index].toString().indexOf('.') +
                           1),
-                  () =>
-                      controller.changeContainer(HOME_CONTAINERS.values[index]),
+                  () => _controller
+                      .changeContainer(HOME_CONTAINERS.values[index]),
                 ),
               ),
             ),
@@ -159,7 +161,7 @@ class HomeLayout extends GetResponsiveView<HomeLayoutController> {
                 Expanded(
                   child: Container(
                     alignment: Alignment.center,
-                    child: Obx(() => controller.container.value),
+                    child: Obx(() => _controller.container.value),
                   ),
                 )
               ],
