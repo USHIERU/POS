@@ -3,6 +3,7 @@ part of '../product_screen.dart';
 class ProductScreenController extends GetxController {
   /// @inmutable
   final ProductsHive productsHive = ProductsHive();
+  
   RxList<Product> products = <Product>[].obs;
   RxBool isLoading = true.obs;
 
@@ -15,6 +16,7 @@ class ProductScreenController extends GetxController {
     while (readyToLoad) {
       if (productsHive.isOpen) {
         getProducts();
+        readyToLoad = false;
       }
       await Future.delayed(Duration(milliseconds: 200));
     }
