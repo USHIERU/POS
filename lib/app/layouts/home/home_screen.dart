@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:pos/app/screens/cash_register/cash_register_screen.dart';
 import 'package:pos/app/screens/category/category_screen.dart';
 import 'package:pos/app/screens/product/product_screen.dart';
+import 'package:pos/app/widgets/my_elevated_button.dart';
 
 part 'controllers/home_screen_controller.dart';
 
@@ -15,15 +16,17 @@ class HomeScreen extends GetResponsiveView<HomeScreenController> {
     return Scaffold(
       appBar: AppBar(),
       drawer: Drawer(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: List.generate(
-            HOME_CONTAINERS.values.length,
-            (index) => ElevatedButton(
-              onPressed: () =>
-                  controller.changeContainer(HOME_CONTAINERS.values[index]),
-              child: Text(HOME_CONTAINERS.values[index].toString().substring(
-                  HOME_CONTAINERS.values[index].toString().indexOf('.') + 1)),
+        child: Container(
+          color: Colors.blue,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: List.generate(
+              HOME_CONTAINERS.values.length,
+              (index) => MyElevatedButton(
+                HOME_CONTAINERS.values[index].toString().substring(
+                    HOME_CONTAINERS.values[index].toString().indexOf('.') + 1),
+                () => controller.changeContainer(HOME_CONTAINERS.values[index]),
+              ),
             ),
           ),
         ),
@@ -37,15 +40,17 @@ class HomeScreen extends GetResponsiveView<HomeScreenController> {
     return Scaffold(
       appBar: AppBar(),
       drawer: Drawer(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: List.generate(
-            HOME_CONTAINERS.values.length,
-            (index) => ElevatedButton(
-              onPressed: () =>
-                  controller.changeContainer(HOME_CONTAINERS.values[index]),
-              child: Text(HOME_CONTAINERS.values[index].toString().substring(
-                  HOME_CONTAINERS.values[index].toString().indexOf('.') + 1)),
+        child: Container(
+          color: Colors.blue,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: List.generate(
+              HOME_CONTAINERS.values.length,
+              (index) => MyElevatedButton(
+                HOME_CONTAINERS.values[index].toString().substring(
+                    HOME_CONTAINERS.values[index].toString().indexOf('.') + 1),
+                () => controller.changeContainer(HOME_CONTAINERS.values[index]),
+              ),
             ),
           ),
         ),
@@ -60,22 +65,19 @@ class HomeScreen extends GetResponsiveView<HomeScreenController> {
       body: Row(
         children: [
           Container(
-            width: 150,
+            width: 200,
             height: double.maxFinite,
             color: Colors.blue,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: List.generate(
                 HOME_CONTAINERS.values.length,
-                (index) => ElevatedButton(
-                  onPressed: () =>
+                (index) => MyElevatedButton(
+                  HOME_CONTAINERS.values[index].toString().substring(
+                      HOME_CONTAINERS.values[index].toString().indexOf('.') +
+                          1),
+                  () =>
                       controller.changeContainer(HOME_CONTAINERS.values[index]),
-                  child: Text(HOME_CONTAINERS.values[index]
-                      .toString()
-                      .substring(HOME_CONTAINERS.values[index]
-                              .toString()
-                              .indexOf('.') +
-                          1)),
                 ),
               ),
             ),
@@ -85,7 +87,7 @@ class HomeScreen extends GetResponsiveView<HomeScreenController> {
               children: [
                 Container(
                   width: double.maxFinite,
-                  height: 50,
+                  height: 70,
                   color: Colors.blue,
                 ),
                 Expanded(
