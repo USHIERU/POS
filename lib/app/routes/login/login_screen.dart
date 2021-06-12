@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:pos/app/layouts/home/home_layout.dart';
+import 'package:pos/app/routes/home/home_layout.dart';
 import 'package:pos/app/widgets/my_buttons.dart';
 import 'package:pos/app/widgets/my_text_form_field.dart';
 
@@ -31,7 +31,7 @@ class LoginScreen extends GetResponsiveView<LoginScreenController> {
             SizedBox(height: 15),
             MyElevatedButton(
               'Entrar',
-              () => Get.offAndToNamed(HomeLayout.routeName),
+              () => Get.offAllNamed(HomeLayout.routeName),
             )
           ],
         ),
@@ -73,7 +73,7 @@ class LoginScreen extends GetResponsiveView<LoginScreenController> {
                       SizedBox(height: 15),
                       MyElevatedButton(
                         'Entrar',
-                        () => Get.offAndToNamed(HomeLayout.routeName),
+                        () => Get.offAllNamed(HomeLayout.routeName),
                       )
                     ],
                   ),
@@ -118,7 +118,7 @@ class LoginScreen extends GetResponsiveView<LoginScreenController> {
                       SizedBox(height: 15),
                       MyElevatedButton(
                         'Entrar',
-                        () => Get.offAndToNamed(HomeLayout.routeName),
+                        () => Get.offAllNamed(HomeLayout.routeName),
                       )
                     ],
                   ),
