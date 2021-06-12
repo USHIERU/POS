@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:pos/app/routes/home/home_screen.dart';
-import 'package:pos/app/routes/login/login_screen.dart';
+import 'package:pos/app/screens/home/home_screen.dart';
+import 'package:pos/app/screens/login/login_screen.dart';
 
 class POS extends StatelessWidget {
   @override

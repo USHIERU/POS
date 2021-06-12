@@ -24,24 +24,31 @@ class ProductScreen extends GetResponsiveView<ProductScreenController> {
         ),
         Divider(),
         Text('Products'),
-        Obx(
-          () => controller.isLoading.value
-              ? CircularProgressIndicator()
-              : Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: controller.products
-                      .map(
-                        (element) => Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text('ProductName: ${element.name}'),
-                            Text('ProductPrice: ${element.price}'),
-                          ],
-                        ),
-                      )
-                      .toList(),
+        Obx(() {
+          if (controller.isLoading.value) return CircularProgressIndicator();
+          return Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text('ProductName',
+                      style: TextStyle(fontWeight: FontWeight.bold)),
+                  Text('ProductPrice',
+                      style: TextStyle(fontWeight: FontWeight.bold)),
+                ],
+              ),
+              for (var product in controller.products)
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(product.name),
+                    Text(product.price.toString()),
+                  ],
                 ),
-        ),
+            ],
+          );
+        }),
       ],
     );
   }
