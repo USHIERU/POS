@@ -1,24 +1,32 @@
-part of '../home_screen.dart';
+part of '../home_layout.dart';
 
 enum HOME_CONTAINERS {
+  DASHBOARD,
   PRODUCTS,
   CASHIER,
   CATEGORIES,
 }
 
-class HomeScreenController extends GetxController {
-  final Rx<Container> container = Container(
-    alignment: Alignment.center,
-    child: Text('Welcome'),
-  ).obs;
+class HomeLayoutController extends GetxController {
+  final Rx<Container> container = Container(child: DashboardScreen()).obs;
 
   changeContainer(HOME_CONTAINERS newContainer) {
-    if (newContainer == HOME_CONTAINERS.PRODUCTS)
-      container.value = Container(child: ProductScreen());
-    else if (newContainer == HOME_CONTAINERS.CASHIER)
-      container.value = Container(child: CashRegisterScreen());
-    else if (newContainer == HOME_CONTAINERS.CATEGORIES)
-      container.value = Container(child: CategoryScreen());
+    switch (newContainer) {
+      case HOME_CONTAINERS.DASHBOARD:
+        container.value = Container(child: DashboardScreen());
+        break;
+      case HOME_CONTAINERS.CASHIER:
+        container.value = Container(child: CashRegisterScreen());
+        break;
+      case HOME_CONTAINERS.PRODUCTS:
+        container.value = Container(child: ProductScreen());
+        break;
+      case HOME_CONTAINERS.CATEGORIES:
+        container.value = Container(child: CategoryScreen());
+        break;
+      default:
+        container.value = Container(child: DashboardScreen());
+    }
 
     Get.back();
   }

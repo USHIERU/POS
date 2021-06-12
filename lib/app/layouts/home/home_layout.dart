@@ -2,14 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pos/app/screens/cash_register/cash_register_screen.dart';
 import 'package:pos/app/screens/category/category_screen.dart';
+import 'package:pos/app/screens/dashboard/dashboard_screen.dart';
 import 'package:pos/app/screens/product/product_screen.dart';
-import 'package:pos/app/widgets/my_elevated_button.dart';
+import 'package:pos/app/widgets/my_buttons.dart';
 
 part 'controllers/home_screen_controller.dart';
 
-class HomeScreen extends GetResponsiveView<HomeScreenController> {
+class HomeLayout extends GetResponsiveView<HomeLayoutController> {
   static final routeName = 'home';
-  final HomeScreenController controller = Get.put(HomeScreenController());
+  final HomeLayoutController controller = Get.put(HomeLayoutController());
 
   @override
   Widget phone() {
@@ -22,7 +23,7 @@ class HomeScreen extends GetResponsiveView<HomeScreenController> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: List.generate(
               HOME_CONTAINERS.values.length,
-              (index) => MyElevatedButton(
+              (index) => MyFlatButton(
                 HOME_CONTAINERS.values[index].toString().substring(
                     HOME_CONTAINERS.values[index].toString().indexOf('.') + 1),
                 () => controller.changeContainer(HOME_CONTAINERS.values[index]),
@@ -46,7 +47,7 @@ class HomeScreen extends GetResponsiveView<HomeScreenController> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: List.generate(
               HOME_CONTAINERS.values.length,
-              (index) => MyElevatedButton(
+              (index) => MyFlatButton(
                 HOME_CONTAINERS.values[index].toString().substring(
                     HOME_CONTAINERS.values[index].toString().indexOf('.') + 1),
                 () => controller.changeContainer(HOME_CONTAINERS.values[index]),
@@ -72,7 +73,7 @@ class HomeScreen extends GetResponsiveView<HomeScreenController> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: List.generate(
                 HOME_CONTAINERS.values.length,
-                (index) => MyElevatedButton(
+                (index) => MyFlatButton(
                   HOME_CONTAINERS.values[index].toString().substring(
                       HOME_CONTAINERS.values[index].toString().indexOf('.') +
                           1),
