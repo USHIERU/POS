@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:pos/app/screens/home/home_screen.dart';
+import 'package:pos/app/layouts/home/home_screen.dart';
 import 'package:pos/app/widgets/my_elevated_button.dart';
 import 'package:pos/app/widgets/my_text_form_field.dart';
 

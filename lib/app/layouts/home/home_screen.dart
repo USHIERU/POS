@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:pos/app/screens/home/views/cash_register/cash_register_screen.dart';
-import 'package:pos/app/screens/home/views/category/category_screen.dart';
-import 'package:pos/app/screens/home/views/product/product_screen.dart';
+import 'package:pos/app/screens/cash_register/cash_register_screen.dart';
+import 'package:pos/app/screens/category/category_screen.dart';
+import 'package:pos/app/screens/product/product_screen.dart';
 
 part 'controllers/home_screen_controller.dart';
 
