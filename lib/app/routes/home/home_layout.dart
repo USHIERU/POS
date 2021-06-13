@@ -5,6 +5,7 @@ import 'package:pos/app/screens/cash_register/cash_register_screen.dart';
 import 'package:pos/app/screens/category/category_screen.dart';
 import 'package:pos/app/screens/dashboard/dashboard_screen.dart';
 import 'package:pos/app/screens/product/product_screen.dart';
+import 'package:pos/app/screens/tables/tables_screen.dart';
 import 'package:pos/app/widgets/my_buttons.dart';
 import 'package:pos/context/session/application/set_session.dart';
 
@@ -50,31 +51,6 @@ class HomeLayout extends GetResponsiveView<HomeLayoutController> {
 
   @override
   Widget phone() {
-    return Scaffold(
-      appBar: AppBar(),
-      drawer: Drawer(
-        child: Container(
-          color: Colors.blue,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: List.generate(
-              HOME_CONTAINERS.values.length,
-              (index) => MyFlatButton(
-                HOME_CONTAINERS.values[index].toString().substring(
-                    HOME_CONTAINERS.values[index].toString().indexOf('.') + 1),
-                () =>
-                    _controller.changeContainer(HOME_CONTAINERS.values[index]),
-              ),
-            ),
-          ),
-        ),
-      ),
-      body: Obx(() => _controller.container.value),
-    );
-  }
-
-  @override
-  Widget tablet() {
     return Scaffold(
       appBar: AppBar(),
       drawer: Drawer(

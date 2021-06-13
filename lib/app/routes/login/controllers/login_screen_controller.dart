@@ -1,7 +1,10 @@
 part of '../login_screen.dart';
 
 class LoginScreenController extends GetxController {
-  login(String user, String password) {
+  String? user;
+  String? password;
+
+  login() {
     if (user == 'admin' && password == 'admin') {
       SetSession(SessionInMemory()).run(Session('Administrator', 7));
       Get.offAllNamed(HomeLayout.routeName);

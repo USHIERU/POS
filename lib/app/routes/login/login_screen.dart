@@ -13,9 +13,6 @@ class LoginScreen extends GetResponsiveView<LoginScreenController> {
   static final routeName = 'Login';
   final LoginScreenController _controller = Get.put(LoginScreenController());
 
-  String? user;
-  String? password;
-
   Widget loginFrom() => Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -28,14 +25,14 @@ class LoginScreen extends GetResponsiveView<LoginScreenController> {
           ),
           SizedBox(height: 50),
           TextFormField(
-            onChanged: (user) => this.user = user,
+            onChanged: (user) => _controller.user = user,
             decoration: InputDecorationStyle.copyWith(
               labelText: 'User',
             ),
           ),
           SizedBox(height: 15),
           TextFormField(
-            onChanged: (password) => this.password = password,
+            onChanged: (password) => _controller.password = password,
             obscureText: true,
             decoration: InputDecorationStyle.copyWith(
               labelText: 'Password',
@@ -44,7 +41,7 @@ class LoginScreen extends GetResponsiveView<LoginScreenController> {
           SizedBox(height: 15),
           MyElevatedButton(
             'Entrar',
-            () => _controller.login(user ?? '', password ?? ''),
+            () => _controller.login(),
           )
         ],
       );
@@ -55,33 +52,6 @@ class LoginScreen extends GetResponsiveView<LoginScreenController> {
       body: Padding(
         padding: const EdgeInsets.all(12),
         child: loginFrom(),
-      ),
-    );
-  }
-
-  @override
-  Widget tablet() {
-    return Scaffold(
-      body: Row(
-        children: [
-          Expanded(
-            flex: 1,
-            child: Container(color: Colors.blue),
-          ),
-          Expanded(
-            flex: 2,
-            child: Container(
-              alignment: Alignment.center,
-              child: ConstrainedBox(
-                constraints: BoxConstraints(maxWidth: 500),
-                child: Padding(
-                  padding: const EdgeInsets.all(12),
-                  child: loginFrom(),
-                ),
-              ),
-            ),
-          ),
-        ],
       ),
     );
   }
