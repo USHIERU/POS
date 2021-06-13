@@ -7,7 +7,6 @@ import 'package:pos/app/screens/dashboard/dashboard_screen.dart';
 import 'package:pos/app/screens/product/product_screen.dart';
 import 'package:pos/app/screens/tables/tables_screen.dart';
 import 'package:pos/app/widgets/my_buttons.dart';
-import 'package:pos/context/session/application/set_session.dart';
 
 part 'controllers/home_screen_controller.dart';
 
