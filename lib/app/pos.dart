@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:pos/app/routes/home/home_layout.dart';
+import 'package:pos/app/routes/admin/admin_layout.dart';
 import 'package:pos/app/routes/login/login_screen.dart';
+import 'package:pos/app/routes/waiter/waiter_layout.dart';
 import 'package:pos/app/utils/middlewares/navigator_observers_middlewares.dart';
 
 class POS extends StatelessWidget {
@@ -20,8 +21,13 @@ class POS extends StatelessWidget {
           page: () => LoginScreen(),
         ),
         GetPage(
-          name: HomeLayout.routeName,
-          page: () => HomeLayout(),
+          name: AdminLayout.routeName,
+          page: () => AdminLayout(),
+          middlewares: [AuthMiddleware()],
+        ),
+        GetPage(
+          name: WaiterLayout.routeName,
+          page: () => WaiterLayout(),
           middlewares: [AuthMiddleware()],
         ),
       ],

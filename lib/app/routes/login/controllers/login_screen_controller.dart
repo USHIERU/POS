@@ -7,7 +7,10 @@ class LoginScreenController extends GetxController {
   login() {
     if (user == 'admin' && password == 'admin') {
       SetSession(SessionInMemory()).run(Session('Administrator', 7));
-      Get.offAllNamed(HomeLayout.routeName);
+      Get.offAllNamed(AdminLayout.routeName);
+    } else if (user == 'waiter' && password == 'waiter') {
+      SetSession(SessionInMemory()).run(Session('Waiter', 2));
+      Get.offAllNamed(WaiterLayout.routeName);
     } else {
       Get.showSnackbar(GetBar(
         title: 'Error',
