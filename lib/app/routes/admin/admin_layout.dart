@@ -8,11 +8,11 @@ import 'package:pos/app/screens/product/product_screen.dart';
 import 'package:pos/app/screens/tables/tables_screen.dart';
 import 'package:pos/app/widgets/my_buttons.dart';
 
-part 'controllers/home_screen_controller.dart';
+part 'controllers/admin_layout_controller.dart';
 
-class HomeLayout extends GetResponsiveView<HomeLayoutController> {
-  static final routeName = 'home';
-  final HomeLayoutController _controller = Get.put(HomeLayoutController());
+class AdminLayout extends GetResponsiveView<AdminLayoutController> {
+  static final routeName = 'admin';
+  final AdminLayoutController _controller = Get.put(AdminLayoutController());
 
   Widget _showPopupMenuChild(String string, void Function() onTap) {
     return Container(

@@ -1,4 +1,4 @@
-part of '../home_layout.dart';
+part of '../admin_layout.dart';
 
 enum HOME_CONTAINERS {
   DASHBOARD,
@@ -8,7 +8,7 @@ enum HOME_CONTAINERS {
   CATEGORIES,
 }
 
-class HomeLayoutController extends GetxController {
+class AdminLayoutController extends GetxController {
   final Rx<Container> container = Container(child: DashboardScreen()).obs;
 
   changeContainer(HOME_CONTAINERS newContainer) {
