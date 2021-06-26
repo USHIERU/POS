@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:pos/app/routes/admin/admin_layout.dart';
 import 'package:pos/app/routes/login/login_screen.dart';
 import 'package:pos/app/routes/waiter/waiter_layout.dart';
+import 'package:pos/app/shared/routes/cash_register/cash_register_screen.dart';
 import 'package:pos/app/utils/middlewares/navigator_observers_middlewares.dart';
 
 class POS extends StatelessWidget {
@@ -28,6 +29,11 @@ class POS extends StatelessWidget {
         GetPage(
           name: WaiterLayout.routeName,
           page: () => WaiterLayout(),
+          middlewares: [AuthMiddleware()],
+        ),
+        GetPage(
+          name: CashRegisterScreen.routeName,
+          page: () => CashRegisterScreen(isRoute: true,),
           middlewares: [AuthMiddleware()],
         ),
       ],

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pos/app/routes/login/login_screen.dart';
-import 'package:pos/app/screens/cash_register/cash_register_screen.dart';
+import 'package:pos/app/shared/routes/cash_register/cash_register_screen.dart';
 import 'package:pos/app/screens/category/category_screen.dart';
 import 'package:pos/app/screens/dashboard/dashboard_screen.dart';
 import 'package:pos/app/screens/product/product_screen.dart';
 import 'package:pos/app/screens/tables/tables_screen.dart';
-import 'package:pos/app/widgets/my_buttons.dart';
+import 'package:pos/app/shared/widgets/my_buttons.dart';
 
 part 'controllers/admin_layout_controller.dart';
 

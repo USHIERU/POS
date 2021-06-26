@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:pos/app/routes/admin/admin_layout.dart';
 import 'package:pos/app/routes/waiter/waiter_layout.dart';
 import 'package:pos/app/settings/size_config.dart';
-import 'package:pos/app/widgets/my_buttons.dart';
+import 'package:pos/app/shared/widgets/my_buttons.dart';
 import 'package:pos/app/utils/styles/text_form_field_styles.dart';
 import 'package:pos/context/session/application/set_session.dart';
 import 'package:pos/context/session/domain/session.dart';
