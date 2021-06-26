@@ -60,10 +60,10 @@ class AdminLayout extends GetResponsiveView<AdminLayoutController> {
             children: List.generate(
               HOME_CONTAINERS.values.length,
               (index) => MyFlatButton(
-                HOME_CONTAINERS.values[index].toString().substring(
-                    HOME_CONTAINERS.values[index].toString().indexOf('.') + 1),
                 () =>
                     _controller.changeContainer(HOME_CONTAINERS.values[index]),
+                text: HOME_CONTAINERS.values[index].toString().substring(
+                    HOME_CONTAINERS.values[index].toString().indexOf('.') + 1),
               ),
             ),
           ),
@@ -87,11 +87,11 @@ class AdminLayout extends GetResponsiveView<AdminLayoutController> {
               children: List.generate(
                 HOME_CONTAINERS.values.length,
                 (index) => MyFlatButton(
-                  HOME_CONTAINERS.values[index].toString().substring(
-                      HOME_CONTAINERS.values[index].toString().indexOf('.') +
-                          1),
                   () => _controller
                       .changeContainer(HOME_CONTAINERS.values[index]),
+                  text: HOME_CONTAINERS.values[index].toString().substring(
+                      HOME_CONTAINERS.values[index].toString().indexOf('.') +
+                          1),
                 ),
               ),
             ),

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pos/app/routes/waiter/widgets/table.dart';
-import 'package:pos/app/settings/size_config.dart';
+import 'package:pos/app/configs/size_config.dart';
 
 part 'controllers/waiter_layout_controller.dart';
 
