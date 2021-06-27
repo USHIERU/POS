@@ -42,8 +42,8 @@ class LoginScreen extends GetResponsiveView<LoginScreenController> {
           ),
           SizedBox(height: 15),
           MyElevatedButton(
-            'Entrar',
             () => _controller.login(),
+            text: 'Entrar',
           )
         ],
       );

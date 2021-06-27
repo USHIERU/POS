@@ -2,19 +2,23 @@ import 'package:flutter/material.dart';
 
 // ignore: non_constant_identifier_names
 ElevatedButton MyElevatedButton(
-  String text,
   void Function() onPressed, {
+  Widget? child,
+  String? text,
   double width = double.maxFinite,
   double height = 55,
   ButtonStyle? style,
   TextStyle textStyle = const TextStyle(),
 }) {
-  return ElevatedButton(
-    onPressed: onPressed,
-    child: Text(
+  if (text != null && child == null)
+    child = Text(
       text,
       style: TextStyle(fontSize: (height / 2) - 5).merge(textStyle),
-    ),
+    );
+
+  return ElevatedButton(
+    onPressed: onPressed,
+    child: child ?? Container(),
     style: ElevatedButton.styleFrom(
       minimumSize: Size(width, height),
     ).merge(style),
