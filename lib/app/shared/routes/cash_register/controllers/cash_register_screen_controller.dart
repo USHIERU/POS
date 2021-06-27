@@ -9,7 +9,10 @@ class CashRegisterScreenController extends GetxController {
   void getCategorys() {
     GetCategories(CategoryInMemory())
         .run()
-        .then((_categorires) => categorires.value = _categorires);
+        .then((_categorires) {
+          categorires.value = _categorires;
+          showProductsFromCategory(_categorires[0]);
+        });
   }
 
   void showProductsFromCategory(Category category) {

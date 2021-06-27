@@ -143,19 +143,42 @@ class CashRegisterScreen
                 Expanded(
                   child: Obx(
                     () => GridView.count(
-                      crossAxisCount: 3,
+                      crossAxisCount: 8,
                       crossAxisSpacing: 4.0,
                       mainAxisSpacing: 8.0,
                       children: List.generate(
                         controller.products.length,
                         (index) {
                           var product = controller.products[index];
-                          return Center(
-                            child: ElevatedButton(
-                              onPressed: () {
-                                controller.addToCart(product);
-                              },
-                              child: Text(product.name),
+                          return Card(
+                            child: Padding(
+                              padding: const EdgeInsets.all(10.0),
+                              child: Column(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    product.name,
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 20,
+                                    ),
+                                  ),
+                                  Text(
+                                    '\$ ${product.price}',
+                                    style: TextStyle(
+                                      color: Colors.blueGrey,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 18,
+                                    ),
+                                  ),
+                                  MyElevatedButton(
+                                    () => controller.addToCart(product),
+                                    text: 'Add',
+                                  ),
+                                ],
+                              ),
                             ),
                           );
                         },
@@ -166,167 +189,163 @@ class CashRegisterScreen
               ],
             ),
           ),
-          Expanded(
-            flex: 1,
-            child: Container(
-              padding: EdgeInsets.only(left: 10),
-              child: Column(
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'Current Order',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 20,
+          Container(
+            width: 350,
+            padding: EdgeInsets.only(left: 10),
+            child: Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Current Order',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20,
+                      ),
+                    ),
+                    Row(
+                      children: [
+                        ElevatedButton(
+                          onPressed: controller.clearCart,
+                          child: Text('Clear All'),
                         ),
-                      ),
-                      Row(
-                        children: [
-                          ElevatedButton(
-                            onPressed: controller.clearCart,
-                            child: Text('Clear All'),
-                          ),
-                          SizedBox(width: 10),
-                          ElevatedButton(
-                            onPressed: () {},
-                            child: Icon(Icons.settings),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: 15),
-                  Expanded(
-                      flex: 10,
-                      child: Column(
-                        children: [
-                          Expanded(
-                            child: Obx(
-                              () => ListView(
-                                children: controller.cart
-                                    .map(
-                                      (cartProduct) => Padding(
-                                        padding: EdgeInsets.only(bottom: 5),
-                                        child: Row(
-                                          children: [
-                                            Expanded(
-                                              flex: 2,
-                                              child: Container(
-                                                alignment: Alignment.centerLeft,
-                                                child: Text(
-                                                    cartProduct.product.name),
-                                              ),
+                        SizedBox(width: 10),
+                        ElevatedButton(
+                          onPressed: () {},
+                          child: Icon(Icons.settings),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+                SizedBox(height: 15),
+                Expanded(
+                    flex: 10,
+                    child: Column(
+                      children: [
+                        Expanded(
+                          child: Obx(
+                            () => ListView(
+                              children: controller.cart
+                                  .map(
+                                    (cartProduct) => Padding(
+                                      padding: EdgeInsets.only(bottom: 5),
+                                      child: Row(
+                                        children: [
+                                          Expanded(
+                                            flex: 2,
+                                            child: Container(
+                                              alignment: Alignment.centerLeft,
+                                              child: Text(
+                                                  cartProduct.product.name),
                                             ),
-                                            SizedBox(width: 5),
-                                            Expanded(
-                                              flex: 3,
-                                              child: Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
-                                                children: [
-                                                  MyFlatButton(
-                                                    () => controller
-                                                        .substractItemToCart(
-                                                            cartProduct),
-                                                    child: Icon(
-                                                        cartProduct.quantity > 1
-                                                            ? Icons
-                                                                .horizontal_rule
-                                                            : Icons.delete),
-                                                    width: 15,
-                                                    height: 15,
-                                                  ),
-                                                  Text(cartProduct.quantity
-                                                      .toString()),
-                                                  MyFlatButton(
-                                                    () => controller
-                                                        .addItemToCart(
-                                                            cartProduct),
-                                                    child: Icon(Icons.add),
-                                                    width: 15,
-                                                    height: 15,
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                            SizedBox(width: 5),
-                                            Expanded(
-                                              flex: 2,
-                                              child: Container(
-                                                alignment:
-                                                    Alignment.centerRight,
-                                                child: Text((cartProduct
-                                                            .product.price *
-                                                        cartProduct.quantity)
+                                          ),
+                                          SizedBox(width: 5),
+                                          Expanded(
+                                            flex: 3,
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                MyFlatButton(
+                                                  () => controller
+                                                      .substractItemToCart(
+                                                          cartProduct),
+                                                  child: Icon(
+                                                      cartProduct.quantity > 1
+                                                          ? Icons
+                                                              .horizontal_rule
+                                                          : Icons.delete),
+                                                  width: 15,
+                                                  height: 15,
+                                                ),
+                                                Text(cartProduct.quantity
                                                     .toString()),
-                                              ),
+                                                MyFlatButton(
+                                                  () =>
+                                                      controller.addItemToCart(
+                                                          cartProduct),
+                                                  child: Icon(Icons.add),
+                                                  width: 15,
+                                                  height: 15,
+                                                ),
+                                              ],
                                             ),
-                                          ],
-                                        ),
+                                          ),
+                                          SizedBox(width: 5),
+                                          Expanded(
+                                            flex: 2,
+                                            child: Container(
+                                              alignment: Alignment.centerRight,
+                                              child: Text(
+                                                  (cartProduct.product.price *
+                                                          cartProduct.quantity)
+                                                      .toString()),
+                                            ),
+                                          ),
+                                        ],
                                       ),
-                                    )
-                                    .toList(),
+                                    ),
+                                  )
+                                  .toList(),
+                            ),
+                          ),
+                        ),
+                        SizedBox(height: 30),
+                        Obx(
+                          () => Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                'Total:',
+                                style: TextStyle(fontSize: 30),
                               ),
-                            ),
-                          ),
-                          SizedBox(height: 30),
-                          Obx(
-                            () => Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  'Total:',
-                                  style: TextStyle(fontSize: 30),
+                              Text(
+                                controller.price.toString(),
+                                style: TextStyle(
+                                  fontSize: 30,
+                                  fontWeight: FontWeight.bold,
                                 ),
-                                Text(
-                                  controller.price.toString(),
-                                  style: TextStyle(
-                                    fontSize: 30,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ],
-                            ),
+                              ),
+                            ],
                           ),
+                        ),
+                      ],
+                    )),
+                Divider(color: Colors.grey.shade300),
+                Expanded(
+                    flex: 2,
+                    child: LayoutBuilder(builder: (context, constrains) {
+                      var height = constrains.maxHeight;
+                      var width = constrains.maxWidth;
+                      return GridView.count(
+                        padding: const EdgeInsets.all(5),
+                        crossAxisSpacing: 5,
+                        mainAxisSpacing: 5,
+                        crossAxisCount: 3,
+                        childAspectRatio: (width / height) - .7,
+                        children: <Widget>[
+                          MyFlatButton(
+                            () {},
+                          ),
+                          MyFlatButton(
+                            () {},
+                          ),
+                          MyFlatButton(
+                            () {},
+                          ),
+                          MyFlatButton(() => Get.back(), text: 'Back'),
+                          MyFlatButton(() {}),
+                          MyFlatButton(() {}),
                         ],
-                      )),
-                  Divider(color: Colors.grey.shade300),
-                  Expanded(
-                      flex: 2,
-                      child: LayoutBuilder(builder: (context, constrains) {
-                        var height = constrains.maxHeight;
-                        var width = constrains.maxWidth;
-                        return GridView.count(
-                          padding: const EdgeInsets.all(5),
-                          crossAxisSpacing: 5,
-                          mainAxisSpacing: 5,
-                          crossAxisCount: 3,
-                          childAspectRatio: (width / height) - .9,
-                          children: <Widget>[
-                            MyFlatButton(
-                              () {},
-                            ),
-                            MyFlatButton(
-                              () {},
-                            ),
-                            MyFlatButton(
-                              () {},
-                            ),
-                            MyFlatButton(() => Get.back(), text: 'Back'),
-                            MyFlatButton(() {}),
-                            MyFlatButton(() {}),
-                          ],
-                        );
-                      })),
-                ],
-              ),
-              decoration: BoxDecoration(
-                  border:
-                      Border(left: BorderSide(color: Colors.grey.shade300))),
+                      );
+                    })),
+              ],
             ),
+            decoration: BoxDecoration(
+                border: Border(left: BorderSide(color: Colors.grey.shade300))),
           ),
         ],
       ),
