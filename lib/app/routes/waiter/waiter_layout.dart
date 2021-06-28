@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:pos/app/routes/waiter/widgets/table.dart';
+import 'package:pos/app/routes/waiter/widgets/table_icon.dart';
 import 'package:pos/app/configs/size_config.dart';
+import 'package:pos/app/shared/widgets/draggable_widget.dart';
 
 part 'controllers/waiter_layout_controller.dart';
 
 class WaiterLayout extends GetResponsiveView<WaiterLayoutController> {
   static final routeName = 'waiter';
+  final GlobalKey containerKey = GlobalKey();
+  final TransformationController transformController =
+      TransformationController();
 
   @override
   Widget build(BuildContext context) {
@@ -21,6 +25,9 @@ class WaiterLayout extends GetResponsiveView<WaiterLayoutController> {
     );
   }
 
+  var draggableWidgetPosX = 10.0;
+  var draggableWidgetPosY = 10.0;
+
   @override
   Widget desktop() {
     return Scaffold(
@@ -31,17 +38,32 @@ class WaiterLayout extends GetResponsiveView<WaiterLayoutController> {
         height: SizeConfig.safeBlockSizeVertical(100),
         width: SizeConfig.safeBlockSizeHorizontal(100),
         alignment: Alignment.center,
-        child: Container(
-          padding: EdgeInsets.all(SizeConfig.safeBlockSizeVertical(2)),
-          height: double.maxFinite,
-          width: double.maxFinite,
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(10),
-          ),
-          child: Row(
+        child: InteractiveViewer(
+          maxScale: 2.0,
+          transformationController: transformController,
+          child: Stack(
             children: [
-              MTable(),
+              Container(
+                key: containerKey,
+                padding: EdgeInsets.all(SizeConfig.safeBlockSizeVertical(2)),
+                height: double.maxFinite,
+                width: double.maxFinite,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(10),
+                ),
+              ),
+              DraggableWidget(
+                containerKey: containerKey,
+                transformController: transformController,
+                child: TableIcon(),
+                x: draggableWidgetPosX,
+                y: draggableWidgetPosY,
+                onDragEnd: (x, y) {
+                  draggableWidgetPosX = x;
+                  draggableWidgetPosY = y;
+                },
+              )
             ],
           ),
         ),
