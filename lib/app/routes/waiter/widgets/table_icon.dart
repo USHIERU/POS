@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pos/app/shared/routes/cash_register/cash_register_screen.dart';
 
-class MTable extends StatelessWidget {
+class TableIcon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
@@ -11,7 +11,8 @@ class MTable extends StatelessWidget {
       style: ElevatedButton.styleFrom(
         shape: CircleBorder(),
         primary: Colors.blue,
-        onPrimary: Colors.blue.shade300
+        onPrimary: Colors.blue.shade300,
+        minimumSize: Size(80, 80),
       ),
     );
   }
