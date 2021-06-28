@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pos/app/shared/widgets/my_buttons.dart';
@@ -141,51 +142,74 @@ class CashRegisterScreen
                 ),
                 SizedBox(height: 30),
                 Expanded(
-                  child: Obx(
-                    () => GridView.count(
-                      crossAxisCount: 8,
-                      crossAxisSpacing: 4.0,
-                      mainAxisSpacing: 8.0,
-                      children: List.generate(
-                        controller.products.length,
-                        (index) {
-                          var product = controller.products[index];
-                          return Card(
-                            child: Padding(
-                              padding: const EdgeInsets.all(10.0),
-                              child: Column(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    product.name,
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 20,
+                  child: LayoutBuilder(
+                    builder:
+                        (BuildContext context, BoxConstraints constraints) {
+                      var crossAxisCount = 1;
+                      final width = constraints.maxWidth;
+                      if (width > 1000) {
+                        crossAxisCount = 8;
+                      } else if (width > 800) {
+                        crossAxisCount = 6;
+                      } else if (width > 500) {
+                        crossAxisCount = 4;
+                      } else if (width > 300) {
+                        crossAxisCount = 2;
+                      }
+                      return Obx(
+                        () => GridView.count(
+                          crossAxisCount: crossAxisCount,
+                          crossAxisSpacing: 4.0,
+                          mainAxisSpacing: 8.0,
+                          children: List.generate(
+                            controller.products.length,
+                            (index) {
+                              var product = controller.products[index];
+                              return MouseRegion(
+                                cursor: SystemMouseCursors.click,
+                                child: GestureDetector(
+                                  onTap: () => controller.addToCart(product),
+                                  child: Card(
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(10.0),
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            product.name,
+                                            style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 20,
+                                            ),
+                                          ),
+                                          Container(
+                                            alignment: Alignment.centerRight,
+                                            width: double.maxFinite,
+                                            child: Text(
+                                              '\$ ${product.price}',
+                                              style: TextStyle(
+                                                color: Colors.blueGrey,
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 18,
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
                                     ),
                                   ),
-                                  Text(
-                                    '\$ ${product.price}',
-                                    style: TextStyle(
-                                      color: Colors.blueGrey,
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 18,
-                                    ),
-                                  ),
-                                  MyElevatedButton(
-                                    () => controller.addToCart(product),
-                                    text: 'Add',
-                                  ),
-                                ],
-                              ),
-                            ),
-                          );
-                        },
-                      ),
-                    ),
+                                ),
+                              );
+                            },
+                          ),
+                        ),
+                      );
+                    },
                   ),
-                )
+                ),
               ],
             ),
           ),
@@ -238,7 +262,11 @@ class CashRegisterScreen
                                             child: Container(
                                               alignment: Alignment.centerLeft,
                                               child: Text(
-                                                  cartProduct.product.name),
+                                                cartProduct.product.name,
+                                                style: TextStyle(
+                                                  fontWeight: FontWeight.w500,
+                                                ),
+                                              ),
                                             ),
                                           ),
                                           SizedBox(width: 5),
@@ -261,8 +289,13 @@ class CashRegisterScreen
                                                   width: 15,
                                                   height: 15,
                                                 ),
-                                                Text(cartProduct.quantity
-                                                    .toString()),
+                                                Text(
+                                                  cartProduct.quantity
+                                                      .toString(),
+                                                  style: TextStyle(
+                                                    fontWeight: FontWeight.w500,
+                                                  ),
+                                                ),
                                                 MyFlatButton(
                                                   () =>
                                                       controller.addItemToCart(
@@ -280,9 +313,11 @@ class CashRegisterScreen
                                             child: Container(
                                               alignment: Alignment.centerRight,
                                               child: Text(
-                                                  (cartProduct.product.price *
-                                                          cartProduct.quantity)
-                                                      .toString()),
+                                                '\$ ${cartProduct.product.price * cartProduct.quantity}',
+                                                style: TextStyle(
+                                                  fontWeight: FontWeight.w500,
+                                                ),
+                                              ),
                                             ),
                                           ),
                                         ],
@@ -303,7 +338,7 @@ class CashRegisterScreen
                                 style: TextStyle(fontSize: 30),
                               ),
                               Text(
-                                controller.price.toString(),
+                                '\$ ${controller.price}',
                                 style: TextStyle(
                                   fontSize: 30,
                                   fontWeight: FontWeight.bold,
