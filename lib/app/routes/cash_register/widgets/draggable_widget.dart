@@ -2,25 +2,12 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
-/// A draggable widget that can "snap" anywhere inside a screen, must be inside a Stack
-/// as it uses [Position] widget
 class DraggableWidget extends StatefulWidget {
   final Widget child;
-
-  /// initial x (top) pos of this widget on screen
   final double x;
-
-  /// initial y (left) pos of this widget on screen
   final double y;
-
-  /// the relative left, top to background container on drag end
   final void Function(double x, double y)? onDragEnd;
-
-  /// key of underlaying background container, so this draggable widget can find
-  /// it's relative local position from
   final GlobalKey containerKey;
-
-  /// Correctly scale feedback object when using this in a scaled view
   final TransformationController? transformController;
 
   DraggableWidget({
@@ -39,7 +26,7 @@ class DraggableWidget extends StatefulWidget {
 
 class DraggableWidgetState extends State<DraggableWidget> {
   late double top, left;
-  late Size normalSize; // size of this widget, independent of Scale
+  late Size normalSize;
   final key = GlobalKey<DraggableWidgetState>();
 
   @override
@@ -71,9 +58,6 @@ class DraggableWidgetState extends State<DraggableWidget> {
         ),
         childWhenDragging: const SizedBox(),
         onDragEnd: (drag) {
-          // just like the feedback, the drag detail is based on the "pre-scaled" widget
-          // we need to translate the offset back to appropriate value to
-          // prevent a "snap" effect which the child is not placed exactly on the dropped position
           var scale = widget.transformController?.value.getMaxScaleOnAxis() ?? 1.0;
           final localOffset = backgroundRenderBox.globalToLocal(drag.offset.translate(
             -(normalSize.width / 2) * (scale - 1.0),
@@ -91,10 +75,8 @@ class DraggableWidgetState extends State<DraggableWidget> {
   }
 }
 
-/// Scale the feedback widget up to the same display size as the dragged widget
 class _ScalableFeedbackWidget extends StatelessWidget {
   final TransformationController? transformController;
-
   final Widget child;
 
   const _ScalableFeedbackWidget({

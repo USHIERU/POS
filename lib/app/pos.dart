@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:pos/app/routes/admin/admin_layout.dart';
+import 'package:pos/app/routes/admin/admin_screen.dart';
 import 'package:pos/app/routes/login/login_screen.dart';
-import 'package:pos/app/routes/waiter/waiter_layout.dart';
-import 'package:pos/app/shared/routes/cash_register/cash_register_screen.dart';
-import 'package:pos/app/utils/middlewares/navigator_observers_middlewares.dart';
+import 'package:pos/app/routes/waiter/waiter_screen.dart';
+import 'package:pos/app/routes/cash_register/cash_register_screen.dart';
+import 'package:pos/app/middlewares/navigator_observers_middlewares.dart';
 
 class POS extends StatelessWidget {
   @override
@@ -20,20 +20,25 @@ class POS extends StatelessWidget {
         GetPage(
           name: LoginScreen.routeName,
           page: () => LoginScreen(),
+          binding: LoginScreenBinding(),
         ),
         GetPage(
-          name: AdminLayout.routeName,
-          page: () => AdminLayout(),
+          name: AdminScreen.routeName,
+          page: () => AdminScreen(),
+          binding: AdminScreenBinding(),
           middlewares: [AuthMiddleware()],
         ),
         GetPage(
-          name: WaiterLayout.routeName,
-          page: () => WaiterLayout(),
+          name: WaiterScreen.routeName,
+          page: () => WaiterScreen(),
+          binding: WaiterScreenBinding(),
           middlewares: [AuthMiddleware()],
         ),
         GetPage(
           name: CashRegisterScreen.routeName,
-          page: () => CashRegisterScreen(isRoute: true,),
+          page: () => CashRegisterScreen(
+            isRoute: true,
+          ),
           middlewares: [AuthMiddleware()],
         ),
       ],

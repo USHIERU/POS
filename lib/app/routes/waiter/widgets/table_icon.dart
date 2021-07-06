@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:pos/app/shared/routes/cash_register/cash_register_screen.dart';
 
 class TableIcon extends StatelessWidget {
+  final void Function() onPressed;
+
+  const TableIcon({Key? key, required this.onPressed}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      onPressed: () => Get.toNamed(CashRegisterScreen.routeName),
+      onPressed: onPressed,
       child: Container(),
       style: ElevatedButton.styleFrom(
         shape: CircleBorder(),

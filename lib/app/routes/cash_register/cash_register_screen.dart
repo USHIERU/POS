@@ -1,14 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:pos/app/shared/widgets/my_buttons.dart';
+import 'package:pos/app/widgets/my_buttons.dart';
 import 'package:pos/context/cart/domain/cart_product.dart';
 import 'package:pos/context/category/application/get_categories.dart';
 import 'package:pos/context/category/domain/category.dart';
 import 'package:pos/context/category/infrastructure/persistence/category_in_memory.dart';
 import 'package:pos/context/product/domain/product.dart';
 
-part 'controllers/cash_register_screen_controller.dart';
+part 'cash_register_screen_controller.dart';
 
 class CashRegisterScreen
     extends GetResponsiveView<CashRegisterScreenController> {

@@ -1,12 +1,15 @@
+library waiter_screen;
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pos/app/routes/waiter/widgets/table_icon.dart';
 import 'package:pos/app/configs/size_config.dart';
-import 'package:pos/app/shared/widgets/draggable_widget.dart';
+import 'package:pos/app/routes/cash_register/widgets/draggable_widget.dart';
 
-part 'controllers/waiter_layout_controller.dart';
+part 'waiter_screen_controller.dart';
+part 'waiter_screen_bindin.dart';
 
-class WaiterLayout extends GetResponsiveView<WaiterLayoutController> {
+class WaiterScreen extends GetResponsiveView<WaiterScreenController> {
   static final routeName = 'waiter';
   final GlobalKey containerKey = GlobalKey();
   final TransformationController transformController =
@@ -24,9 +27,6 @@ class WaiterLayout extends GetResponsiveView<WaiterLayoutController> {
       body: SafeArea(child: Container()),
     );
   }
-
-  var draggableWidgetPosX = 10.0;
-  var draggableWidgetPosY = 10.0;
 
   @override
   Widget desktop() {
@@ -56,12 +56,14 @@ class WaiterLayout extends GetResponsiveView<WaiterLayoutController> {
               DraggableWidget(
                 containerKey: containerKey,
                 transformController: transformController,
-                child: TableIcon(),
-                x: draggableWidgetPosX,
-                y: draggableWidgetPosY,
+                child: TableIcon(
+                  onPressed: controller.onTapTable,
+                ),
+                x: 10,
+                y: 10,
                 onDragEnd: (x, y) {
-                  draggableWidgetPosX = x;
-                  draggableWidgetPosY = y;
+                  // asd = x;
+                  // asd = y;
                 },
               )
             ],

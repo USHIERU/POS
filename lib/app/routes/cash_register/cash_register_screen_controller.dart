@@ -1,4 +1,4 @@
-part of '../cash_register_screen.dart';
+part of 'cash_register_screen.dart';
 
 class CashRegisterScreenController extends GetxController {
   RxList<Category> categorires = <Category>[].obs;

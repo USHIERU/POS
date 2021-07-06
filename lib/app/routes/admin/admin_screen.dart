@@ -1,18 +1,19 @@
+library admin_screen;
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pos/app/routes/login/login_screen.dart';
-import 'package:pos/app/shared/routes/cash_register/cash_register_screen.dart';
-import 'package:pos/app/screens/category/category_screen.dart';
-import 'package:pos/app/screens/dashboard/dashboard_screen.dart';
-import 'package:pos/app/screens/product/product_screen.dart';
-import 'package:pos/app/screens/tables/tables_screen.dart';
-import 'package:pos/app/shared/widgets/my_buttons.dart';
+import 'package:pos/app/routes/cash_register/cash_register_screen.dart';
+import 'package:pos/app/routes/admin/screens/category/category_screen.dart';
+import 'package:pos/app/routes/admin/screens/dashboard/dashboard_screen.dart';
+import 'package:pos/app/routes/admin/screens/product/product_screen.dart';
+import 'package:pos/app/widgets/my_buttons.dart';
 
-part 'controllers/admin_layout_controller.dart';
+part 'admin_screen_controller.dart';
+part 'admin_screen_binding.dart';
 
-class AdminLayout extends GetResponsiveView<AdminLayoutController> {
+class AdminScreen extends GetResponsiveView<AdminScreenController> {
   static final routeName = 'admin';
-  final AdminLayoutController _controller = Get.put(AdminLayoutController());
 
   Widget _showPopupMenuChild(String string, void Function() onTap) {
     return Container(
@@ -40,8 +41,7 @@ class AdminLayout extends GetResponsiveView<AdminLayoutController> {
           enabled: false,
         ),
         PopupMenuItem(
-            child: _showPopupMenuChild(
-                'Sign out', () => _controller.closeSession()),
+            child: _showPopupMenuChild('Sign out', controller.closeSession),
             value: 'Sign out'),
       ],
       elevation: 8.0,
@@ -60,8 +60,7 @@ class AdminLayout extends GetResponsiveView<AdminLayoutController> {
             children: List.generate(
               HOME_CONTAINERS.values.length,
               (index) => MyFlatButton(
-                () =>
-                    _controller.changeContainer(HOME_CONTAINERS.values[index]),
+                () => controller.changeContainer(HOME_CONTAINERS.values[index]),
                 text: HOME_CONTAINERS.values[index].toString().substring(
                     HOME_CONTAINERS.values[index].toString().indexOf('.') + 1),
               ),
@@ -69,7 +68,7 @@ class AdminLayout extends GetResponsiveView<AdminLayoutController> {
           ),
         ),
       ),
-      body: Obx(() => _controller.container.value),
+      body: Obx(() => controller.container.value),
     );
   }
 
@@ -87,8 +86,8 @@ class AdminLayout extends GetResponsiveView<AdminLayoutController> {
               children: List.generate(
                 HOME_CONTAINERS.values.length,
                 (index) => MyFlatButton(
-                  () => _controller
-                      .changeContainer(HOME_CONTAINERS.values[index]),
+                  () =>
+                      controller.changeContainer(HOME_CONTAINERS.values[index]),
                   text: HOME_CONTAINERS.values[index].toString().substring(
                       HOME_CONTAINERS.values[index].toString().indexOf('.') +
                           1),
@@ -136,7 +135,7 @@ class AdminLayout extends GetResponsiveView<AdminLayoutController> {
                 Expanded(
                   child: Container(
                     alignment: Alignment.center,
-                    child: Obx(() => _controller.container.value),
+                    child: Obx(() => controller.container.value),
                   ),
                 )
               ],

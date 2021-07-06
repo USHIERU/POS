@@ -1,4 +1,4 @@
-part of '../admin_layout.dart';
+part of admin_screen;
 
 enum HOME_CONTAINERS {
   DASHBOARD,
@@ -8,16 +8,13 @@ enum HOME_CONTAINERS {
   CATEGORIES,
 }
 
-class AdminLayoutController extends GetxController {
+class AdminScreenController extends GetxController {
   final Rx<Container> container = Container(child: DashboardScreen()).obs;
 
   changeContainer(HOME_CONTAINERS newContainer) {
     switch (newContainer) {
       case HOME_CONTAINERS.DASHBOARD:
         container.value = Container(child: DashboardScreen());
-        break;
-      case HOME_CONTAINERS.TABLES:
-        container.value = Container(child: TablesScreen());
         break;
       case HOME_CONTAINERS.CASHIER:
         container.value = Container(child: CashRegisterScreen());
@@ -35,7 +32,7 @@ class AdminLayoutController extends GetxController {
     Get.back();
   }
 
-  closeSession(){
-     Get.offAllNamed(LoginScreen.routeName);
+  closeSession() {
+    Get.offAllNamed(LoginScreen.routeName);
   }
 }
