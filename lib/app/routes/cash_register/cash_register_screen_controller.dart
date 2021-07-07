@@ -7,12 +7,12 @@ class CashRegisterScreenController extends GetxController {
   RxDouble price = 0.0.obs;
 
   void getCategorys() {
-    GetCategories(CategoryInMemory())
+    GetCategories(POSConfig().factory.getCategoryRepository)
         .run()
         .then((_categorires) {
-          categorires.value = _categorires;
-          showProductsFromCategory(_categorires[0]);
-        });
+      categorires.value = _categorires;
+      showProductsFromCategory(_categorires[0]);
+    });
   }
 
   void showProductsFromCategory(Category category) {

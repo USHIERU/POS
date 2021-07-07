@@ -2,9 +2,14 @@ library waiter_screen;
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:pos/app/configs/pos_config.dart';
+import 'package:pos/app/routes/cash_register/cash_register_screen.dart';
 import 'package:pos/app/routes/waiter/widgets/table_icon.dart';
 import 'package:pos/app/configs/size_config.dart';
 import 'package:pos/app/routes/cash_register/widgets/draggable_widget.dart';
+import 'package:pos/context/table/application/get_tables.dart';
+import 'package:pos/context/table/domain/table.dart' as Domain;
+import 'package:pos/context/table/infrastructure/persistence/in_memory/in_memory_table_repository.dart';
 
 part 'waiter_screen_controller.dart';
 part 'waiter_screen_bindin.dart';
@@ -41,32 +46,37 @@ class WaiterScreen extends GetResponsiveView<WaiterScreenController> {
         child: InteractiveViewer(
           maxScale: 2.0,
           transformationController: transformController,
-          child: Stack(
-            children: [
-              Container(
-                key: containerKey,
-                padding: EdgeInsets.all(SizeConfig.safeBlockSizeVertical(2)),
-                height: double.maxFinite,
-                width: double.maxFinite,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(10),
+          child: Obx(
+            () => Stack(
+              children: [
+                Container(
+                  key: containerKey,
+                  padding: EdgeInsets.all(SizeConfig.safeBlockSizeVertical(2)),
+                  height: double.maxFinite,
+                  width: double.maxFinite,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(10),
+                  ),
                 ),
-              ),
-              DraggableWidget(
-                containerKey: containerKey,
-                transformController: transformController,
-                child: TableIcon(
-                  onPressed: controller.onTapTable,
+                ...List.generate(
+                  controller.tables.length,
+                  (index) => DraggableWidget(
+                    containerKey: containerKey,
+                    transformController: transformController,
+                    child: TableIcon(
+                      onPressed: controller.onTapTable,
+                    ),
+                    x: controller.tables[index].posX,
+                    y: controller.tables[index].posY,
+                    onDragEnd: (x, y) {
+                      // controller.tables[index].posX += x;
+                      // controller.tables[index].posY += y;
+                    },
+                  ),
                 ),
-                x: 10,
-                y: 10,
-                onDragEnd: (x, y) {
-                  // asd = x;
-                  // asd = y;
-                },
-              )
-            ],
+              ],
+            ),
           ),
         ),
       )),

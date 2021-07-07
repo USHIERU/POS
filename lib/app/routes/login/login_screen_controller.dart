@@ -6,10 +6,12 @@ class LoginScreenController extends GetxController {
 
   login() {
     if (user.text == 'admin' && password.text == 'admin') {
-      SetSession(SessionInMemory()).run(Session('Administrator', 7));
+      SetSession(POSConfig().factory.getSessionRepository)
+          .run(Session('Administrator', 7));
       Get.offAllNamed(AdminScreen.routeName);
     } else if (user.text == 'waiter' && password.text == 'waiter') {
-      SetSession(SessionInMemory()).run(Session('Waiter', 2));
+      SetSession(POSConfig().factory.getSessionRepository)
+          .run(Session('Waiter', 2));
       Get.offAllNamed(WaiterScreen.routeName);
     } else {
       Get.showSnackbar(GetBar(

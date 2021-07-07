@@ -2,13 +2,13 @@ library login_screen;
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:pos/app/configs/pos_config.dart';
 import 'package:pos/app/routes/admin/admin_screen.dart';
 import 'package:pos/app/routes/login/widgets/login_form.dart';
 import 'package:pos/app/routes/waiter/waiter_screen.dart';
 import 'package:pos/app/configs/size_config.dart';
 import 'package:pos/context/session/application/set_session.dart';
 import 'package:pos/context/session/domain/session.dart';
-import 'package:pos/context/session/infrastructure/persistence/session_in_memory.dart';
 
 part './login_screen_controller.dart';
 part './login_screen_binding.dart';

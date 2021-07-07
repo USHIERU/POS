@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:pos/app/configs/pos_config.dart';
 import 'package:pos/app/widgets/my_buttons.dart';
 import 'package:pos/context/cart/domain/cart_product.dart';
 import 'package:pos/context/category/application/get_categories.dart';

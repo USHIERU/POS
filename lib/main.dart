@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:pos/app/configs/pos_config.dart';
 import 'package:pos/app/pos.dart';
-import 'package:pos/context/shared/infrastructure/persistence/hive/hive_connection.dart';
+import 'package:pos/context/shared/infrastructure/factory/in_memory_factory.dart';
 
 void main() async {
-  await HiveConnection().connect();
+  final pos = POSConfig(factory: InMemoryFactory());
+  await pos.init();
   runApp(POS());
 }
