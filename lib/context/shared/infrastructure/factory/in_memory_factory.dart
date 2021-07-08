@@ -8,6 +8,8 @@ import 'package:pos/context/session/infrastructure/persistence/session_in_memory
 import 'package:pos/context/shared/domain/abstract_factory_repository.dart';
 import 'package:pos/context/table/domain/table_repository.dart';
 import 'package:pos/context/table/infrastructure/persistence/in_memory/in_memory_table_repository.dart';
+import 'package:pos/context/user/domain/user_repository.dart';
+import 'package:pos/context/user/infrastructure/persistence/in_memory/user_in_memory.dart';
 
 class InMemoryFactory extends AbstractFactoryRepository {
   @override
@@ -24,4 +26,7 @@ class InMemoryFactory extends AbstractFactoryRepository {
 
   @override
   TableRepository get getTableRepository => InMemoryTableRepository();
+
+  @override
+  UserRepository get getUserRepository => UserInMemory();
 }

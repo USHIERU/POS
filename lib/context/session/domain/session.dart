@@ -1,6 +1,7 @@
-class Session {
-  String name;
-  int permissions;
+import 'package:pos/context/user/domain/user.dart';
 
-  Session(this.name, this.permissions);
+class Session {
+  final User user;
+
+  Session(this.user);
 }

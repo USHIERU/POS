@@ -4,6 +4,7 @@ import 'package:pos/context/category/domain/category_repository.dart';
 import 'package:pos/context/cart/domain/cart_product_repository.dart';
 import 'package:pos/context/shared/domain/abstract_factory_repository.dart';
 import 'package:pos/context/table/domain/table_repository.dart';
+import 'package:pos/context/user/domain/user_repository.dart';
 
 class HiveFactory extends AbstractFactoryRepository {
   @override
@@ -20,4 +21,7 @@ class HiveFactory extends AbstractFactoryRepository {
 
   @override
   TableRepository get getTableRepository => throw UnimplementedError();
+
+  @override
+  UserRepository get getUserRepository => throw UnimplementedError();
 }
