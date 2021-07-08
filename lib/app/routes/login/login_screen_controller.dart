@@ -9,7 +9,7 @@ class LoginScreenController extends GetxController {
         .run(user.text, password.text)
         .then((user) {
       SetSession(POSConfig().factory.getSessionRepository).run(Session(user));
-      _goTo(user.permisos);
+      _goTo(user.permission);
     }).catchError((error) {
       Get.showSnackbar(GetBar(
         title: 'Error',
