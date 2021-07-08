@@ -3,13 +3,12 @@ library waiter_screen;
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pos/app/configs/pos_config.dart';
-import 'package:pos/app/routes/cash_register/cash_register_screen.dart';
+import 'package:pos/app/routes/waiter/widgets/waiter_sign_in/waiter_sign_in.dart';
 import 'package:pos/app/routes/waiter/widgets/table_icon.dart';
 import 'package:pos/app/configs/size_config.dart';
 import 'package:pos/app/routes/cash_register/widgets/draggable_widget.dart';
 import 'package:pos/context/table/application/get_tables.dart';
 import 'package:pos/context/table/domain/table.dart' as Domain;
-import 'package:pos/context/table/infrastructure/persistence/in_memory/in_memory_table_repository.dart';
 
 part 'waiter_screen_controller.dart';
 part 'waiter_screen_bindin.dart';
@@ -74,6 +73,13 @@ class WaiterScreen extends GetResponsiveView<WaiterScreenController> {
                       // controller.tables[index].posY += y;
                     },
                   ),
+                ),
+                Obx(
+                  () => controller.isNumberPadVisible.value
+                      ? WaiterSignIn(
+                        onCloseWaiterSignIn: controller.onCloseNumberPad,
+                      )
+                      : Container(),
                 ),
               ],
             ),
