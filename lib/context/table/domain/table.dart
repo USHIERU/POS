@@ -1,5 +1,7 @@
+import 'package:uuid/uuid.dart';
+
 class Table {
-  final String id;
+  final Uuid id;
   final String tableName;
   final double posX;
   final double posY;
