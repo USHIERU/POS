@@ -9,6 +9,8 @@ import 'package:pos/app/routes/waiter/waiter_screen.dart';
 import 'package:pos/app/configs/size_config.dart';
 import 'package:pos/context/session/application/set_session.dart';
 import 'package:pos/context/session/domain/session.dart';
+import 'package:pos/context/shared/value-objects/permissions.dart';
+import 'package:pos/context/user/application/get_user.dart';
 
 part './login_screen_controller.dart';
 part './login_screen_binding.dart';

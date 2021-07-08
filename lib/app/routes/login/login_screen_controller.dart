@@ -4,20 +4,30 @@ class LoginScreenController extends GetxController {
   TextEditingController user = TextEditingController();
   TextEditingController password = TextEditingController();
 
-  login() {
-    if (user.text == 'admin' && password.text == 'admin') {
-      SetSession(POSConfig().factory.getSessionRepository)
-          .run(Session('Administrator', 7));
-      Get.offAllNamed(AdminScreen.routeName);
-    } else if (user.text == 'waiter' && password.text == 'waiter') {
-      SetSession(POSConfig().factory.getSessionRepository)
-          .run(Session('Waiter', 2));
-      Get.offAllNamed(WaiterScreen.routeName);
-    } else {
+  void login() {
+    GetUser(POSConfig().factory.getUserRepository)
+        .run(user.text, password.text)
+        .then((user) {
+      SetSession(POSConfig().factory.getSessionRepository).run(Session(user));
+      _goTo(user.permisos);
+    }).catchError((error) {
       Get.showSnackbar(GetBar(
         title: 'Error',
         message: 'Usuario o contrase;a incorrecta',
       ));
+    });
+  }
+
+  void _goTo(Permissions permissions) {
+    switch (permissions) {
+      case Permissions.ADMIN:
+        Get.offAllNamed(AdminScreen.routeName);
+        break;
+      case Permissions.WAITER:
+        Get.offAllNamed(WaiterScreen.routeName);
+        break;
+      case Permissions.CASHIER:
+        break;
     }
   }
 }
