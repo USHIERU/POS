@@ -1,12 +1,11 @@
 import 'package:pos/context/table/domain/table.dart';
 import 'package:pos/context/table/domain/table_repository.dart';
+import 'package:uuid/uuid.dart';
 
 class InMemoryTableRepository extends TableRepository {
-  static final List<Table> _tables = List<Table>.empty(growable: true);
-
-  InMemoryTableRepository(){
-    _tables.add(Table('id', 'A1', 10, 10));
-  }
+  static final List<Table> _tables = <Table>[
+    Table(Uuid(), 'A1', 10, 10),
+  ];
 
   @override
   Future<void> addTable(Table table) async {
