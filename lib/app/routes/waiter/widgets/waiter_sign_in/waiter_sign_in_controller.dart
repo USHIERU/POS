@@ -1,9 +1,10 @@
 part of waiter_sign_in;
 
 class WaiterSignInController extends GetxController {
+  Context.User? waiterSelected;
+  Context.Table? tableSelected;
   RxString password = ''.obs;
   RxBool isWaiterSelected = false.obs;
-  Context.User? waiterSelected;
   RxList<Context.User> waiters = RxList<Context.User>.empty();
 
   WaiterSignInController() {
@@ -34,14 +35,18 @@ class WaiterSignInController extends GetxController {
     password.value = password.value.substring(0, password.value.length - 1);
   }
 
-  void signIn() {
+  void signIn(void Function() onCloseWaiterSignIn) {
     if (waiterSelected == null) {
       print('<WaiterSignInController> User Null');
       return;
     }
 
     if (password.value == waiterSelected!.password) {
-      Get.toNamed(CashRegisterScreen.routeName);
+      onCloseWaiterSignIn();
+      password.value = '';
+      isWaiterSelected.value = false;
+      waiterSelected = null;
+      Get.toNamed(CashRegisterScreen.routeName, arguments: tableSelected);
     }
   }
 }

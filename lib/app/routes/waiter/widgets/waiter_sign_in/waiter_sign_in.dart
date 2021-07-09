@@ -10,8 +10,11 @@ part './waiter_sign_in_controller.dart';
 
 class WaiterSignIn extends GetResponsiveView<WaiterSignInController> {
   final void Function() onCloseWaiterSignIn;
+  final Context.Table table;
 
-  WaiterSignIn({required this.onCloseWaiterSignIn});
+  WaiterSignIn({required this.onCloseWaiterSignIn, required this.table}) {
+    controller.tableSelected = this.table;
+  }
 
   @override
   Widget? desktop() {
@@ -242,7 +245,8 @@ class WaiterSignIn extends GetResponsiveView<WaiterSignInController> {
                       ),
                       Expanded(
                         child: ElevatedButton(
-                          onPressed: controller.signIn,
+                          onPressed: () =>
+                              controller.signIn(onCloseWaiterSignIn),
                           child: Icon(Icons.arrow_forward_ios),
                           style: ElevatedButton.styleFrom(
                             shape: CircleBorder(),

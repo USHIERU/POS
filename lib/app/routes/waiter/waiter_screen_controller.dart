@@ -3,6 +3,7 @@ part of waiter_screen;
 class WaiterScreenController extends GetxController {
   RxList<Context.Table> tables = RxList<Context.Table>.empty(growable: true);
   RxBool isNumberPadVisible = false.obs;
+  Context.Table? currentTable;
 
   WaiterScreenController() {
     Context.GetTables(POSConfig().factory.getTableRepository)
@@ -14,8 +15,8 @@ class WaiterScreenController extends GetxController {
     isNumberPadVisible.value = false;
   }
 
-  void onTapTable() {
+  void onTapTable(Context.Table table) {
+    currentTable = table;
     isNumberPadVisible.value = true;
-    // Get.toNamed(CashRegisterScreen.routeName);
   }
 }

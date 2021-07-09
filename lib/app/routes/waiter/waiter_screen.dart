@@ -63,7 +63,8 @@ class WaiterScreen extends GetResponsiveView<WaiterScreenController> {
                     containerKey: containerKey,
                     transformController: transformController,
                     child: TableIcon(
-                      onPressed: controller.onTapTable,
+                      onPressed: () =>
+                          controller.onTapTable(controller.tables[index]),
                     ),
                     x: controller.tables[index].posX,
                     y: controller.tables[index].posY,
@@ -76,8 +77,9 @@ class WaiterScreen extends GetResponsiveView<WaiterScreenController> {
                 Obx(
                   () => controller.isNumberPadVisible.value
                       ? WaiterSignIn(
-                        onCloseWaiterSignIn: controller.onCloseNumberPad,
-                      )
+                          onCloseWaiterSignIn: controller.onCloseNumberPad,
+                          table: controller.currentTable!,
+                        )
                       : Container(),
                 ),
               ],
