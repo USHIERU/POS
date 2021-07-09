@@ -3,7 +3,6 @@ part of cart;
 class CartInMemory extends CartRepository {
   static Map<String, Cart> _carts = Map<String, Cart>();
 
-  @override
   Future<Cart> addCart(Table table) async {
     if (_carts[table.id] is Cart?) {
       var cart = Cart();
@@ -17,7 +16,7 @@ class CartInMemory extends CartRepository {
   Future<Cart> getCart(Table table) async {
     var cart = _carts[table.id];
     if (cart is Cart) return cart;
-    throw '<CartInMemory> Cart not found';
+    return await addCart(table);
   }
 
   @override
@@ -27,7 +26,7 @@ class CartInMemory extends CartRepository {
       try {
         cart.products.firstWhere((product) {
           var productFound = product.product.id == cartProduct.product.id;
-          product.add();
+          if (productFound) product.add();
           return productFound;
         });
         return;
@@ -43,5 +42,23 @@ class CartInMemory extends CartRepository {
   @override
   Future<List<CartProduct>> getCartProducts(Table table) async {
     return _carts[table.id]?.products ?? List<CartProduct>.empty();
+  }
+
+  @override
+  Future<void> subtractCartProduct(CartProduct cartProduct, Table table) async {
+    var cart = _carts[table.id];
+    if (cart is Cart) {
+      try {
+        cart.products.firstWhere((product) {
+          var productFound = product.product.id == cartProduct.product.id;
+          if (productFound) product.subtract();
+          return productFound;
+        });
+        return;
+      } catch (e) {
+        print('<CartInMemory> Product not found');
+      }
+      _carts[table.id] = Cart(products: [...cart.products, cartProduct]);
+    }
   }
 }
