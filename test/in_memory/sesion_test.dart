@@ -10,12 +10,16 @@ main() {
 
   group('Session', () {
     test('Session should be saved in memory and should be a Waiter', () async {
+      final userTest = 'Ushieru';
+      final passwordTest = 'password';
+      final addUser = AddUser(factory.getUserRepository);
       final setSession = SetSession(factory.getSessionRepository);
-      final user =
-          await GetUser(factory.getUserRepository).run('waiter', 'waiter');
-      final session = Session(user);
+      final getUser = GetUser(factory.getUserRepository);
 
-      final waiterSession = setSession.run(session);
+      addUser
+          .run(User.fromPrimitives(userTest, passwordTest, Permissions.WAITER));
+      final user = await getUser.run(userTest, passwordTest);
+      final waiterSession = setSession.run(Session(user));
 
       expect(waiterSession.user.permission, Permissions.WAITER);
     });
