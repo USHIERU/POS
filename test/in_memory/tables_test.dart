@@ -19,31 +19,29 @@ main() {
 
     test('Add Cart', () async {
       final getTables = GetTables(factory.getTableRepository);
-      final addCart = AddCart(factory.getCartRepository);
       final tables = await getTables.run();
       final table = tables.first;
+      final getCart = GetCart(factory.getCartRepository);
 
-      final newCart = await addCart.run(table);
+      final cart = await getCart.run(table);
 
-      expect(newCart, isA<Cart>());
-      expect(newCart.products.isEmpty, true);
+
+      expect(cart, isA<Cart>());
+      expect(cart.products.isEmpty, true);
     });
 
     test('Add product', () async {
       final getProduct = GetProducts(factory.getProductRepository);
       final getTables = GetTables(factory.getTableRepository);
-      final addCart = AddCart(factory.getCartRepository);
       final getCart = GetCart(factory.getCartRepository);
       final addCartProduct = AddCartProduct(factory.getCartRepository);
 
       final tables = await getTables.run();
       final table = tables.first;
-      final newCart = await addCart.run(table);
       final products = await getProduct.run();
       await addCartProduct.run(CartProduct(products.first), table);
       final cart = await getCart.run(table);
 
-      expect(newCart, isA<Cart>());
       expect(cart, isA<Cart>());
       expect(cart.products.isNotEmpty, true);
       expect(cart.products.first.product.id, products.first.id);
@@ -52,15 +50,12 @@ main() {
     test('Add the same product twice', () async {
       final getProduct = GetProducts(factory.getProductRepository);
       final getTables = GetTables(factory.getTableRepository);
-      final addCart = AddCart(factory.getCartRepository);
       final getCart = GetCart(factory.getCartRepository);
       final addCartProduct = AddCartProduct(factory.getCartRepository);
 
       final tables = await getTables.run();
       final table = tables.first;
-      await addCart.run(table);
       final products = await getProduct.run();
-      await addCartProduct.run(CartProduct(products.first), table);
       await addCartProduct.run(CartProduct(products.first), table);
       final cart = await getCart.run(table);
 
