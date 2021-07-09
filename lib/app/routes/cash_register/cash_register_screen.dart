@@ -54,21 +54,7 @@ class CashRegisterScreen
                   ),
                 ),
                 SizedBox(height: 30),
-                Obx(
-                  () => Wrap(
-                    children: List.generate(
-                      controller.categorires.length,
-                      (index) => Padding(
-                        padding: EdgeInsets.only(right: 5),
-                        child: ElevatedButton(
-                          onPressed: () => controller.showProductsFromCategory(
-                              controller.categorires[index]),
-                          child: Text(controller.categorires[index].name),
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
+                categories(),
                 SizedBox(height: 30),
                 Expanded(
                   child: LayoutBuilder(
@@ -177,105 +163,9 @@ class CashRegisterScreen
                     flex: 10,
                     child: Column(
                       children: [
-                        Expanded(
-                          child: Obx(
-                            () => ListView(
-                              // children: controller.cart
-                              //     .map(
-                              //       (cartProduct) => Padding(
-                              //         padding: EdgeInsets.only(bottom: 5),
-                              //         child: Row(
-                              //           children: [
-                              //             Expanded(
-                              //               flex: 2,
-                              //               child: Container(
-                              //                 alignment: Alignment.centerLeft,
-                              //                 child: Text(
-                              //                   cartProduct.product.name,
-                              //                   style: TextStyle(
-                              //                     fontWeight: FontWeight.w500,
-                              //                   ),
-                              //                 ),
-                              //               ),
-                              //             ),
-                              //             SizedBox(width: 5),
-                              //             Expanded(
-                              //               flex: 3,
-                              //               child: Row(
-                              //                 mainAxisAlignment:
-                              //                     MainAxisAlignment
-                              //                         .spaceBetween,
-                              //                 children: [
-                              //                   MyFlatButton(
-                              //                     () => controller
-                              //                         .substractItemToCart(
-                              //                             cartProduct),
-                              //                     child: Icon(
-                              //                         cartProduct.quantity > 1
-                              //                             ? Icons
-                              //                                 .horizontal_rule
-                              //                             : Icons.delete),
-                              //                     width: 15,
-                              //                     height: 15,
-                              //                   ),
-                              //                   Text(
-                              //                     cartProduct.quantity
-                              //                         .toString(),
-                              //                     style: TextStyle(
-                              //                       fontWeight: FontWeight.w500,
-                              //                     ),
-                              //                   ),
-                              //                   MyFlatButton(
-                              //                     () =>
-                              //                         controller.addItemToCart(
-                              //                             cartProduct),
-                              //                     child: Icon(Icons.add),
-                              //                     width: 15,
-                              //                     height: 15,
-                              //                   ),
-                              //                 ],
-                              //               ),
-                              //             ),
-                              //             SizedBox(width: 5),
-                              //             Expanded(
-                              //               flex: 2,
-                              //               child: Container(
-                              //                 alignment: Alignment.centerRight,
-                              //                 child: Text(
-                              //                   '\$ ${cartProduct.product.price * cartProduct.quantity}',
-                              //                   style: TextStyle(
-                              //                     fontWeight: FontWeight.w500,
-                              //                   ),
-                              //                 ),
-                              //               ),
-                              //             ),
-                              //           ],
-                              //         ),
-                              //       ),
-                              //     )
-                              //     .toList(),
-                            ),
-                          ),
-                        ),
+                        Expanded(child: cartProducts()),
                         SizedBox(height: 30),
-                        Obx(
-                          () => Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                'Total:',
-                                style: TextStyle(fontSize: 30),
-                              ),
-                              Text(
-                                '\$ ${controller.price}',
-                                style: TextStyle(
-                                  fontSize: 30,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
+                        total(),
                       ],
                     )),
                 Divider(color: Colors.grey.shade300),
@@ -315,4 +205,111 @@ class CashRegisterScreen
       ),
     );
   }
+
+  Widget categories() => Obx(
+        () => Wrap(
+          children: List.generate(
+            controller.categorires.length,
+            (index) => Padding(
+              padding: EdgeInsets.only(right: 5),
+              child: ElevatedButton(
+                onPressed: () => controller
+                    .showProductsFromCategory(controller.categorires[index]),
+                child: Text(controller.categorires[index].name),
+              ),
+            ),
+          ),
+        ),
+      );
+
+  Widget total() => Obx(
+        () => Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              'Total:',
+              style: TextStyle(fontSize: 30),
+            ),
+            Text(
+              '\$ ${controller.total.value}',
+              style: TextStyle(
+                fontSize: 30,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ],
+        ),
+      );
+
+  Widget cartProducts() => Obx(
+        () => ListView(
+          children: List.generate(
+            controller.cartProducts.length,
+            (index) {
+              var cartProduct = controller.cartProducts[index];
+              return Padding(
+                padding: EdgeInsets.only(bottom: 5),
+                child: Row(
+                  children: [
+                    Expanded(
+                      flex: 2,
+                      child: Container(
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          cartProduct.product.name,
+                          style: TextStyle(
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ),
+                    ),
+                    SizedBox(width: 5),
+                    Expanded(
+                      flex: 3,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          MyFlatButton(
+                            () => controller.substractItemToCart(cartProduct),
+                            child: Icon(cartProduct.quantity > 1
+                                ? Icons.horizontal_rule
+                                : Icons.delete),
+                            width: 15,
+                            height: 15,
+                          ),
+                          Text(
+                            cartProduct.quantity.toString(),
+                            style: TextStyle(
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                          MyFlatButton(
+                            () => controller.addItemToCart(cartProduct),
+                            child: Icon(Icons.add),
+                            width: 15,
+                            height: 15,
+                          ),
+                        ],
+                      ),
+                    ),
+                    SizedBox(width: 5),
+                    Expanded(
+                      flex: 2,
+                      child: Container(
+                        alignment: Alignment.centerRight,
+                        child: Text(
+                          '\$ ${cartProduct.product.price * cartProduct.quantity}',
+                          style: TextStyle(
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              );
+            },
+          ),
+        ),
+      );
 }
