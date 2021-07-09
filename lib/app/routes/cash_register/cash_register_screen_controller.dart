@@ -1,13 +1,18 @@
-part of 'cash_register_screen.dart';
+part of cash_register;
 
 class CashRegisterScreenController extends GetxController {
-  RxList<Category> categorires = <Category>[].obs;
-  RxList<Product> products = <Product>[].obs;
-  RxList<CartProduct> cart = <CartProduct>[].obs;
+  late final Context.Table table;
+  late final Context.Cart cart;
+  RxList<Context.Category> categorires = <Context.Category>[].obs;
+  RxList<Context.Product> products = <Context.Product>[].obs;
   RxDouble price = 0.0.obs;
 
+  CashRegisterScreenController() {
+    table = Get.arguments.table;
+  }
+
   void getCategorys() {
-    GetCategories(POSConfig().factory.getCategoryRepository)
+    Context.GetCategories(POSConfig().factory.getCategoryRepository)
         .run()
         .then((_categorires) {
       categorires.value = _categorires;
@@ -15,58 +20,22 @@ class CashRegisterScreenController extends GetxController {
     });
   }
 
-  void showProductsFromCategory(Category category) {
+  void showProductsFromCategory(Context.Category category) {
     products.value = category.products;
   }
 
-  void addToCart(Product product) {
-    bool exist = false;
-    final newCartList = List.generate(cart.length, (index) {
-      if (cart[index].product.id == product.id) {
-        exist = true;
-        cart[index].add();
-      }
-      return cart[index];
-    });
-    var newCart = RxList<CartProduct>.from(newCartList);
-    if (!exist) newCart.add(CartProduct(product));
-    cart.value = newCart;
-    _updatePrice();
+  void addToCart(Context.Product product) {
   }
 
-  void substractItemToCart(CartProduct catProduct) {
-    final newCartList = List.generate(cart.length, (index) {
-      if (cart[index].product.id == catProduct.product.id)
-        cart[index].subtract();
-      if (cart[index].quantity == 0) return null;
-      return cart[index];
-    });
-    final newCart = RxList<CartProduct>.from(
-        newCartList.where((newCartListItem) => newCartListItem != null));
-    cart.value = newCart;
-    _updatePrice();
+  void substractItemToCart(Context.CartProduct catProduct) {
   }
 
-  void addItemToCart(CartProduct catProduct) {
-    final newCartList = List.generate(cart.length, (index) {
-      if (cart[index].product.id == catProduct.product.id) cart[index].add();
-      return cart[index];
-    });
-    final newCart = RxList<CartProduct>.from(newCartList);
-    cart.value = newCart;
-    _updatePrice();
+  void addItemToCart(Context.CartProduct catProduct) {
   }
 
   void clearCart() {
-    final newCart = RxList<CartProduct>.empty();
-    cart.value = newCart;
-    price.value = 0;
   }
 
   void _updatePrice() {
-    double totalPrice = 0;
-    cart.forEach((newCartProduct) =>
-        totalPrice += (newCartProduct.product.price * newCartProduct.quantity));
-    price.value = totalPrice;
   }
 }

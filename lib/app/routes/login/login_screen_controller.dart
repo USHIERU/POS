@@ -5,10 +5,10 @@ class LoginScreenController extends GetxController {
   TextEditingController password = TextEditingController();
 
   void login() {
-    GetUser(POSConfig().factory.getUserRepository)
+    Context.GetUser(POSConfig().factory.getUserRepository)
         .run(user.text, password.text)
         .then((user) {
-      SetSession(POSConfig().factory.getSessionRepository).run(Session(user));
+      Context.SetSession(POSConfig().factory.getSessionRepository).run(Context.Session(user));
       _goTo(user.permission);
     }).catchError((error) {
       Get.showSnackbar(GetBar(
@@ -18,15 +18,15 @@ class LoginScreenController extends GetxController {
     });
   }
 
-  void _goTo(Permissions permissions) {
+  void _goTo(Context.Permissions permissions) {
     switch (permissions) {
-      case Permissions.ADMIN:
+      case Context.Permissions.ADMIN:
         Get.offAllNamed(AdminScreen.routeName);
         break;
-      case Permissions.WAITER:
+      case Context.Permissions.WAITER:
         Get.offAllNamed(WaiterScreen.routeName);
         break;
-      case Permissions.CASHIER:
+      case Context.Permissions.CASHIER:
         break;
     }
   }

@@ -7,8 +7,7 @@ import 'package:pos/app/routes/waiter/widgets/waiter_sign_in/waiter_sign_in.dart
 import 'package:pos/app/routes/waiter/widgets/table_icon.dart';
 import 'package:pos/app/configs/size_config.dart';
 import 'package:pos/app/routes/cash_register/widgets/draggable_widget.dart';
-import 'package:pos/context/table/application/get_tables.dart';
-import 'package:pos/context/table/domain/table.dart' as Domain;
+import 'package:context/context.dart' as Context;
 
 part 'waiter_screen_controller.dart';
 part 'waiter_screen_bindin.dart';

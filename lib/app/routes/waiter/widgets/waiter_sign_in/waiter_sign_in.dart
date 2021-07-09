@@ -4,9 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pos/app/configs/pos_config.dart';
 import 'package:pos/app/routes/cash_register/cash_register_screen.dart';
-import 'package:pos/context/shared/value-objects/permissions.dart';
-import 'package:pos/context/user/application/get_users.dart';
-import 'package:pos/context/user/domain/user.dart';
+import 'package:context/context.dart' as Context;
 
 part './waiter_sign_in_controller.dart';
 
@@ -75,9 +73,9 @@ class WaiterSignIn extends GetResponsiveView<WaiterSignInController> {
                   controller.password.value.length,
                   (index) => ClipOval(
                     child: Container(
-                      height: 60,
-                      width: 60,
-                      color: Colors.grey,
+                      height: 50,
+                      width: 50,
+                      color: Colors.grey.shade800,
                     ),
                   ),
                 ),

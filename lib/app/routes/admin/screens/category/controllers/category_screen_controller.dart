@@ -1,20 +1,20 @@
-part of '../category_screen.dart';
+part of category_screen;
 
 class CategoryScreenController extends GetxController {
-  RxList<Category> categories = <Category>[].obs;
+  RxList<Context.Category> categories = <Context.Category>[].obs;
 
   CategoryScreenController() {
     getCategories();
   }
 
   void getCategories() {
-    GetCategories(CategoryInMemory())
+    Context.GetCategories(Context.CategoryInMemory())
         .run()
         .then((value) => categories.value = value);
   }
 
-  void addCategory(Category category) {
-    AddCategory(CategoryInMemory())
+  void addCategory(Context.Category category) {
+    Context.AddCategory(Context.CategoryInMemory())
         .run(category)
         .then((value) => getCategories());
   }

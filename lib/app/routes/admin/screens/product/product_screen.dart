@@ -1,9 +1,9 @@
+library product_screen;
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:pos/context/product/application/get_products.dart';
-import 'package:pos/context/product/application/save_product.dart';
-import 'package:pos/context/product/domain/product.dart';
-import 'package:pos/context/product/infrastructure/persistence/products_hive.dart';
+import 'package:pos/app/configs/pos_config.dart';
+import 'package:context/context.dart' as Context;
 
 part 'controllers/product_screen_controller.dart';
 
@@ -18,8 +18,7 @@ class ProductScreen extends GetResponsiveView<ProductScreenController> {
         TextFormField(),
         TextFormField(),
         ElevatedButton(
-          onPressed: () =>
-              controller.addProduct(Product(6, 'newProduct', 10, 3)),
+          onPressed: controller.addProduct,
           child: Text('Add Product'),
         ),
         Divider(),
@@ -61,8 +60,7 @@ class ProductScreen extends GetResponsiveView<ProductScreenController> {
         TextFormField(),
         TextFormField(),
         ElevatedButton(
-          onPressed: () =>
-              controller.addProduct(Product(6, 'newProduct', 10, 3)),
+          onPressed: controller.addProduct,
           child: Text('Add Product'),
         ),
         Divider(),
@@ -95,8 +93,7 @@ class ProductScreen extends GetResponsiveView<ProductScreenController> {
         TextFormField(),
         TextFormField(),
         ElevatedButton(
-          onPressed: () =>
-              controller.addProduct(Product(6, 'newProduct', 10, 3)),
+          onPressed: controller.addProduct,
           child: Text('Add Product'),
         ),
         Divider(),

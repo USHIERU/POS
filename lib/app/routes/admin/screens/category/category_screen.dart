@@ -1,9 +1,8 @@
+library category_screen;
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:pos/context/category/application/add_category.dart';
-import 'package:pos/context/category/application/get_categories.dart';
-import 'package:pos/context/category/domain/category.dart';
-import 'package:pos/context/category/infrastructure/persistence/category_in_memory.dart';
+import 'package:context/context.dart' as Context;
 
 part 'controllers/category_screen_controller.dart';
 
@@ -20,7 +19,7 @@ class CategoryScreen extends GetResponsiveView<CategoryScreenController> {
         TextFormField(),
         ElevatedButton(
           onPressed: () => controller.addCategory(
-              Category(3, 'newCategory', DateTime.now(), DateTime.now())),
+              Context.Category(3, 'newCategory', DateTime.now(), DateTime.now())),
           child: Text('Add Category'),
         ),
         Obx(
@@ -33,13 +32,6 @@ class CategoryScreen extends GetResponsiveView<CategoryScreenController> {
           ),
         ),
       ],
-    );
-  }
-
-  @override
-  Widget tablet() {
-    return Column(
-      children: [],
     );
   }
 
