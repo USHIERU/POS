@@ -1,6 +1,6 @@
 part of table;
 
-class InMemoryTableRepository extends TableRepository {
+class TableInMemory extends TableRepository {
   static final List<Table> _tables = <Table>[
     Table(Uuid(), 'A1', 10, 10),
   ];
