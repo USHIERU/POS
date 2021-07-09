@@ -8,4 +8,9 @@ class Cart {
   }
 
   List<CartProduct> get products => _products;
+
+  @override
+  String toString() {
+    return 'Cart { products: $_products}';
+  }
 }
