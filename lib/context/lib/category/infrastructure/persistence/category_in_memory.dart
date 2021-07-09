@@ -14,8 +14,9 @@ class CategoryInMemory implements CategoryRepository {
 
   @override
   Future<List<Category>> getCategories() async {
+    // TODO
     var categories = CategoryInMemory._categories;
-    var priducts = await GetProducts(ProductsInMemery()).run();
+    var priducts = await GetProducts(ProductsInMemory()).run();
     var categoriesWithProducts = categories.map((category) {
       priducts.forEach((product) {
         if (product.idCategory == category.id) {
