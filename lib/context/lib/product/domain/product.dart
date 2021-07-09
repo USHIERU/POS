@@ -1,18 +1,16 @@
 part of product;
 
 class Product {
-  final Uuid _id;
+  final String id;
   final String name;
   final double price;
   final int idCategory;
 
-  Product(this._id, this.name, this.price, this.idCategory);
+  Product(Uuid id, this.name, this.price, this.idCategory): this.id = id.v4();
 
   factory Product.fromPrimitives(String name, double price, Category category) {
     return Product(Uuid(), name, price, category.id);
   }
-
-  String get id => _id.v4();
 
   @override
   String toString() {
