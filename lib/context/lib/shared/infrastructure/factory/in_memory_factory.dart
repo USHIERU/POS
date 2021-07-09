@@ -1,21 +1,28 @@
 part of shared;
 
 class InMemoryFactory extends AbstractFactoryRepository {
-  @override
-  CartRepository get getCartRepository => CartInMemory();
+ CartRepository _cartRepository = CartInMemory();
+ CategoryInMemory _categoryInMemory = CategoryInMemory();
+ ProductsInMemory _productsInMemory = ProductsInMemory();
+ SessionInMemory _sessionInMemory = SessionInMemory();
+ TableInMemory _tableInMemory = TableInMemory();
+ UserInMemory _userInMemory = UserInMemory();
 
   @override
-  CategoryRepository get getCategoryRepository => CategoryInMemory();
+  CartRepository get getCartRepository => _cartRepository;
 
   @override
-  ProductRepository get getProductRepository => ProductsInMemery();
+  CategoryRepository get getCategoryRepository => _categoryInMemory;
 
   @override
-  SessionRepository get getSessionRepository => SessionInMemory();
+  ProductRepository get getProductRepository => _productsInMemory;
 
   @override
-  TableRepository get getTableRepository => InMemoryTableRepository();
+  SessionRepository get getSessionRepository => _sessionInMemory;
 
   @override
-  UserRepository get getUserRepository => UserInMemory();
+  TableRepository get getTableRepository => _tableInMemory;
+
+  @override
+  UserRepository get getUserRepository => _userInMemory;
 }
