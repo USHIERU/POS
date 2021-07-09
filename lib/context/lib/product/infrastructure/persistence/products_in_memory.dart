@@ -1,6 +1,6 @@
 part of product;
 
-class ProductsInMemery implements ProductRepository {
+class ProductsInMemory implements ProductRepository {
   static List<Product> _products = <Product>[
     Product(Uuid(), 'Tomate', 10, 1),
     Product(Uuid(), 'Manzana', 15, 1),
@@ -12,12 +12,12 @@ class ProductsInMemery implements ProductRepository {
 
   @override
   Future<List<Product>> getProducts() {
-    return Future.value(ProductsInMemery._products);
+    return Future.value(ProductsInMemory._products);
   }
 
   @override
   Future<Product> save(Product product) {
-    ProductsInMemery._products = [...ProductsInMemery._products, product];
+    ProductsInMemory._products = [...ProductsInMemory._products, product];
     return Future.value(product);
   }
 }
